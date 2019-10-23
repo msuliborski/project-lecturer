@@ -79,7 +79,7 @@ public class LogInScreen extends AppCompatActivity implements View.OnClickListen
         _googleBtn.setOnClickListener(this);
         _facebookBtn.setOnClickListener(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("837433808791-6hakls25qhhi7l4qra6fa28ccl361fjl.apps.googleusercontent.com")
+                .requestIdToken("480379190-n37hgr44oa67lroc4ir934kb90heei4d.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
         _googleSignInClient = GoogleSignIn.getClient(this, gso);
