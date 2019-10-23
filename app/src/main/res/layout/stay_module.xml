@@ -177,7 +177,7 @@
 
     </RelativeLayout>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/stay_recycler_view"
         android:scrollbars="vertical"
         android:layout_width="match_parent"
@@ -185,6 +185,6 @@
         android:layout_weight="50">
 
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
