@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Project_Lecturer</string>
-    <string name="google_map_api_key">AIzaSyB2bs_3kTprk-Pqn6YK5UXlPVmEjtRKdwQ</string>
+    <string name="google_map_api_key">AIzaSyBcJUj6duPmHPuCmag-veFK1bytff8h5yc</string>
     <string name="facebook_app_id">2341358939256022</string>
     <string name="fb_login_protocol_scheme">fb2341358939256022</string>
     <string name="login_text">Log in</string>
