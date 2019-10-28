@@ -15,6 +15,8 @@ import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import lombok.Getter;
+
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MenuItem;
@@ -51,19 +53,12 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     private ProgramClient _programClient = ProgramClient.getInstance();
     private FirebaseAuth _auth = FirebaseAuth.getInstance();
-
+    @Getter
+    private ListView listView = new ListView();
     private MapScreen _mapScreenFragment = new MapScreen();
     private Credits _creditsFragment = new Credits();
-    private EnquireCreator _enquireCreatorFragment = new EnquireCreator();
-    private Module _foodModuleFragment = Module.newIstance(0);
-    private Module _eventsModuleFragment = Module.newIstance(2);
-    private Module _facilitiesModuleFragment = Module.newIstance(3);
-    private Module _stayModuleFragment = Module.newIstance(1);
     private MainMenu _mainMenuFragment;
     private Settings _settingsFragment = new Settings();
-    private EnquireView _enquireViewFragment = new EnquireView();
-    private AnswerCreator _answerCreator;
-    private PlaceView _placeViewFragment = new PlaceView();
     private Fragment _currentFragment;
     private FragmentManager _fragmentManager = getSupportFragmentManager();
     private FragmentTransaction _fragmentTransaction;
@@ -71,14 +66,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private SharedPreferences _pref;
     private Resources _resources;
     private Configuration _conf;
-
-    public PlaceView getPlaceViewFragment () {
-        return _placeViewFragment;
-    }
-
-    public EnquireView getEnquireViewFragment() {
-        return _enquireViewFragment;
-    }
 
     public SharedPreferences getPref() {
         return _pref;
@@ -94,14 +81,6 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     public MapScreen getMapScreenFragment () {
         return _mapScreenFragment;
-    }
-
-    public EnquireCreator getEnquireCreatorFragment () {
-        return _enquireCreatorFragment;
-    }
-
-    public AnswerCreator getAnswerCreatorFragment () {
-        return _answerCreator;
     }
 
     public Fragment getCurrentFragment() {
@@ -168,32 +147,16 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         _credits.setOnClickListener(this);
         _profile = findViewById(R.id.profileButton);
         _profile.setOnClickListener(this);
-
         _mainMenuFragment = _mapScreenFragment.getMainMenu();
-        _answerCreator = _mapScreenFragment.getAnswerCreator();
-
-
         _fragmentTransaction = _fragmentManager.beginTransaction();
         _fragmentTransaction.add(R.id.screen_area, _creditsFragment);
         _fragmentTransaction.hide(_creditsFragment);
-        _fragmentTransaction.add(R.id.screen_area, _enquireCreatorFragment);
-        _fragmentTransaction.hide(_enquireCreatorFragment);
-        _fragmentTransaction.add(R.id.screen_area, _foodModuleFragment);
-        _fragmentTransaction.hide(_foodModuleFragment);
         _fragmentTransaction.add(R.id.screen_area, _settingsFragment);
         _fragmentTransaction.hide(_settingsFragment);
-        _fragmentTransaction.add(R.id.screen_area,_enquireViewFragment);
-        _fragmentTransaction.hide(_enquireViewFragment);
-        _fragmentTransaction.add(R.id.screen_area, _placeViewFragment);
-        _fragmentTransaction.hide(_placeViewFragment);
-        _fragmentTransaction.add(R.id.screen_area, _eventsModuleFragment);
-        _fragmentTransaction.hide(_eventsModuleFragment);
-        _fragmentTransaction.add(R.id.screen_area, _facilitiesModuleFragment);
-        _fragmentTransaction.hide(_facilitiesModuleFragment);
-        _fragmentTransaction.add(R.id.screen_area, _stayModuleFragment);
-        _fragmentTransaction.hide(_stayModuleFragment);
         _fragmentTransaction.add(R.id.screen_area, _mapScreenFragment);
-        _currentFragment = _mapScreenFragment;
+        _fragmentTransaction.hide(_mapScreenFragment);
+        _fragmentTransaction.add(R.id.screen_area, listView);
+        _currentFragment = listView;
         _fragmentTransaction.commit();
 
     }
@@ -207,7 +170,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
         if (view == _food) {
             view.startAnimation(_buttonClick);
-            fragment = _foodModuleFragment;
+            fragment = _mapScreenFragment;
             Log.d("tag", "onComplete: kurwa3");
         } else if (view == _profile) {
             view.startAnimation(_buttonClick);
@@ -216,18 +179,13 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
             fragment = _creditsFragment;
         } else if (view == _accommodation) {
             view.startAnimation(_buttonClick);
-            fragment = _stayModuleFragment;
         } else if (view == _events) {
             view.startAnimation(_buttonClick);
-            fragment = _eventsModuleFragment;
         } else if (view == _facilities) {
             view.startAnimation(_buttonClick);
-            fragment = _facilitiesModuleFragment;
         } else if (view == _home) {
             view.startAnimation(_buttonClick);
-            _mapScreenFragment.setLockedOnPlace(false);
-            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-            fragment = _mapScreenFragment;
+            fragment = listView;
         }
         setCurrentFragment(fragment);
     }
@@ -250,40 +208,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onBackPressed() {
         if (_currentFragment == _mapScreenFragment) {
-            if (_mapScreenFragment.getCurrentFragment() == _answerCreator) {
-                setCurrentFragment(_enquireViewFragment.getPreviousFragment());
-            } else {
-                super.onBackPressed();
-            }
-        } else if (_currentFragment == _foodModuleFragment) {
-            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-            _mapScreenFragment.setLockedOnPlace(false);
-            setCurrentFragment(_mapScreenFragment);
-        } else if (_currentFragment == _creditsFragment) {
-            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-            _mapScreenFragment.setLockedOnPlace(false);
-            setCurrentFragment(_mapScreenFragment);
-        } else if (_currentFragment == _enquireCreatorFragment) {
-            setCurrentFragment(_enquireCreatorFragment.getPreviousFragment());
-        } else if (_currentFragment == _settingsFragment) {
-            setCurrentFragment(_mapScreenFragment);
-        } else if (_currentFragment == _enquireViewFragment) {
-            setCurrentFragment(_enquireViewFragment.getPreviousFragment());
-        } else if (_currentFragment == _placeViewFragment) {
-            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-            setCurrentFragment(_mapScreenFragment);
-        } else if (_currentFragment == _eventsModuleFragment) {
-            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-            _mapScreenFragment.setLockedOnPlace(false);
-            setCurrentFragment(_mapScreenFragment);
-        } else if (_currentFragment == _facilitiesModuleFragment) {
-            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-            _mapScreenFragment.setLockedOnPlace(false);
-            setCurrentFragment(_mapScreenFragment);
-        } else if (_currentFragment == _stayModuleFragment) {
-            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-            _mapScreenFragment.setLockedOnPlace(false);
-            setCurrentFragment(_mapScreenFragment);
+            super.onBackPressed();
         }
     }
 

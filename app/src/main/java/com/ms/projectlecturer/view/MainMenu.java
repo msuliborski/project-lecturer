@@ -37,6 +37,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
     private User _currentUser;
     private MainScreen _mainScreen;
     private MapScreen _mapScreen;
+    private ListView _listView;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -76,6 +77,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
 
         _mainScreen = (MainScreen) getActivity();
         _mapScreen = _mainScreen.getMapScreenFragment();
+        _listView = _mainScreen.getListView();
     }
 
     @Override
@@ -88,13 +90,7 @@ public class MainMenu extends Fragment implements View.OnClickListener {
             getActivity().finish();
         } else if (view == _database) {
             view.startAnimation(_buttonClick);
-            EnquireCreator enquireCreator = _mainScreen.getEnquireCreatorFragment();
-            enquireCreator.setPreviousFragment(_mapScreen);
-            enquireCreator.getSpinner().setSelection(0);
-            enquireCreator.resetEnquireContent();
-            _mainScreen.setCurrentFragment(enquireCreator);
         }  else if (view == _app) {
-            Log.d("tag", "onComplete: kurwa2");
             view.startAnimation(_buttonClick);
         } else if (view == _aboutLodz) {
             view.startAnimation(_buttonClick);
