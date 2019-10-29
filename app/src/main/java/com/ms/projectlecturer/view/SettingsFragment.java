@@ -46,7 +46,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
         _spinnerPaths = new String[] {
                 "English",
                 "Polski"};
-        _spinner = view.findViewById(R.id.spinner_language);
+        _spinner = view.findViewById(R.id.languageSpinner);
         ArrayAdapter<String> adapter = new ArrayAdapter<>(getActivity(),
                 android.R.layout.simple_spinner_item, _spinnerPaths);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
