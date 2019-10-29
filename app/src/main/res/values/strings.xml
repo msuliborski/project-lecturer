@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project_Lecturer</string>
+    <string name="app_name">PROJECT: Lecturer</string>
     <string name="google_map_api_key">AIzaSyBcJUj6duPmHPuCmag-veFK1bytff8h5yc</string>
     <string name="facebook_app_id">2341358939256022</string>
     <string name="fb_login_protocol_scheme">fb2341358939256022</string>
@@ -31,7 +31,7 @@
     <string name="near">near</string>
     <string name="dolar">$</string>
     <string name="now">now</string>
-    <string name="wiki">http://en.wikipedia.org/wiki/%C5%81%C3%B3d%C5%BA</string>
+    <string name="wiki">https://edu.p.lodz.pl/</string>
     <string name="description">We are a group of IFE students from IT department who, through this PBL project, created this application.</string>
     <string name="fire"> Fire inside the mountain - something unexpected, yet something vivid and strong.
 Hidden initials in the logo mean that together, we stand strong and tall like mountains

@@ -64,6 +64,7 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
     private MapFragment _mapFragmentFragment = new MapFragment();
     private SidebarFragment _sidebarFragment = new SidebarFragment();
     private CreditsFragment _creditsFragmentFragment = new CreditsFragment();
+    private LecturerFragment _lecturerFragment = new LecturerFragment();
     private SettingsFragment _settingsFragmentFragment = new SettingsFragment();
     private Fragment _currentFragment;
     private FragmentManager _fragmentManager = getSupportFragmentManager();
@@ -99,6 +100,11 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
 
     public Fragment getLecturersFragment() {
         return _lecturersListFragment;
+    }
+
+
+    public Fragment getLecturerFragment() {
+        return _lecturerFragment;
     }
 
 
@@ -176,9 +182,11 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
         _profile = sidebarView.findViewById(R.id.profileButton);
         _profile.setOnClickListener(this);
         _fragmentTransaction = _fragmentManager.beginTransaction();
-        _fragmentTransaction.add(R.id.screen_area, _creditsFragmentFragment);
         _fragmentTransaction.add(R.id.nav_area, _sidebarFragment);
+        _fragmentTransaction.add(R.id.screen_area, _creditsFragmentFragment);
         _fragmentTransaction.hide(_creditsFragmentFragment);
+        _fragmentTransaction.add(R.id.screen_area, _lecturerFragment);
+        _fragmentTransaction.hide(_lecturerFragment);
         _fragmentTransaction.add(R.id.screen_area, _settingsFragmentFragment);
         _fragmentTransaction.hide(_settingsFragmentFragment);
         _fragmentTransaction.add(R.id.screen_area, _mapFragmentFragment);

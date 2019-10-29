@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Project_Lecturer</string>
+    <string name="app_name">PROJECT: Lecturer</string>
     <string name="google_map_api_key">AIzaSyBcJUj6duPmHPuCmag-veFK1bytff8h5yc</string>
     <string name="facebook_app_id">2341358939256022</string>
     <string name="fb_login_protocol_scheme">fb2341358939256022</string>
@@ -32,7 +32,7 @@
     <string name="dolar">$</string>
     <string name="now">now</string>
     <string name="answer">Odpowiedz na post</string>
-    <string name="wiki">http://pl.wikipedia.org/wiki/%C5%81%C3%B3d%C5%BA</string>
+    <string name="wiki">https://edu.p.lodz.pl/</string>
     <string name="description">Jesteśmy grupą studentów IFE z kierunku IT, którzy w ramach projektu PBL (ang. Problem Based Learning) stworzyli tę aplikację.</string>
     <string name="fire"> Fire inside the mountain - coś niespodziewanego, uzewnętrznienie siły i witalnej mocy.
         Inicjały ukryte w logo zespołu są symbolem naszego nieokiełznanego zapału i niezłomnego podążania w kierunku wyznaczonego celu.</string>
