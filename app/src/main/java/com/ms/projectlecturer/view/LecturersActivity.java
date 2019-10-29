@@ -34,6 +34,8 @@ import com.bumptech.glide.request.RequestOptions;
 import com.ms.projectlecturer.R;
 import com.ms.projectlecturer.controller.ProgramClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.ms.projectlecturer.model.FacultyType;
+import com.ms.projectlecturer.util.LecturerSpawner;
 
 import java.util.Locale;
 
@@ -184,6 +186,22 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
         _fragmentTransaction.add(R.id.screen_area, _lecturersListFragment);
         _currentFragment = _lecturersListFragment;
         _fragmentTransaction.commit();
+
+//        LecturerSpawner.spawnNewLecturer("Augusto", "Pinochet", FacultyType.FTIMS);
+//        LecturerSpawner.spawnNewLecturer("Murray", "Rothbard", FacultyType.WEEIA);
+//        LecturerSpawner.spawnNewLecturer("Milton", "Friedman", FacultyType.CHEM);
+//        LecturerSpawner.spawnNewLecturer("Janusz", "Korwin-Mikke", FacultyType.CHEM);
+//        LecturerSpawner.spawnNewLecturer("Ronald", "Reagan", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Margaret", "Thatcher", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Ozjasz", "Goldberg", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
 
     }
 

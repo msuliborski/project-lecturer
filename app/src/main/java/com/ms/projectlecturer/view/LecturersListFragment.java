@@ -98,6 +98,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
                 ArrayList<Lecturer> lecturers = new ArrayList<>();
                 for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                     Lecturer l = childSnapshot.getValue(Lecturer.class);
+                    lecturers.add(l);
                 }
                 Collections.sort(lecturers);
                 Collections.reverse(lecturers);

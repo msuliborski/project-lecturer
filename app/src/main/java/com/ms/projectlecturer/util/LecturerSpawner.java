@@ -17,7 +17,7 @@ public class LecturerSpawner {
         Lecturer l = new Lecturer(key, firstName, lastName, facultyType);
         Map<String, Object> lValues = l.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
-        childUpdates.put("/Enquires/" + key, lValues);
+        childUpdates.put("/Lecturers/" + key, lValues);
         _databaseReference.updateChildren(childUpdates);
     }
 }
