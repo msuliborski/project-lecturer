@@ -10,12 +10,12 @@ import android.view.ViewGroup;
 
 import com.ms.projectlecturer.R;
 
-public class Credits extends Fragment {
+public class CreditsFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.credits, container, false);
+        return inflater.inflate(R.layout.fragment_credits, container, false);
     }
 
     @Override

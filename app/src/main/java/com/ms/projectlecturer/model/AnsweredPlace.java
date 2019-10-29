@@ -2,7 +2,7 @@ package com.ms.projectlecturer.model;
 import android.content.res.Resources;
 
 import com.ms.projectlecturer.R;
-import com.ms.projectlecturer.view.MainScreen;
+import com.ms.projectlecturer.view.LecturersActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -149,7 +149,7 @@ public class AnsweredPlace {
 
 
         public String toString(boolean withName) {
-            Resources resources = MainScreen.getContext().getResources();
+            Resources resources = LecturersActivity.getContext().getResources();
             if (withName) {
                 return resources.getString(R.string.placeName) + ": " + _placeName + "\n" +
                         resources.getString(R.string.chosenAsAnswer) + " " + new Integer(_enquireCount).toString() + " " +
@@ -171,7 +171,7 @@ public class AnsweredPlace {
     }
 
     public String toString() {
-        Resources resources = MainScreen.getContext().getResources();
+        Resources resources = LecturersActivity.getContext().getResources();
         String type = "";
         switch (_mostPopularEnquireType) {
             case Events:

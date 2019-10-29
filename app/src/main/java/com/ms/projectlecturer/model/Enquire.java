@@ -3,7 +3,7 @@ package com.ms.projectlecturer.model;
 import android.content.res.Resources;
 
 import com.ms.projectlecturer.R;
-import com.ms.projectlecturer.view.MainScreen;
+import com.ms.projectlecturer.view.LecturersActivity;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.text.SimpleDateFormat;
@@ -142,7 +142,7 @@ public class Enquire implements Comparable<Enquire> {
 
     @Override
     public String toString() {
-        Resources resources = MainScreen.getContext().getResources();
+        Resources resources = LecturersActivity.getContext().getResources();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         String date = sdf.format(_creationDate);
 

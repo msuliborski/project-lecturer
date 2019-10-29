@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.ms.projectlecturer.BuildConfig;
 import com.ms.projectlecturer.R;
-import com.ms.projectlecturer.model.AnsweredPlace;
 import com.ms.projectlecturer.model.Enquire;
 import com.ms.projectlecturer.util.Constants;
 import com.google.android.gms.common.ConnectionResult;
@@ -45,26 +44,19 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.libraries.places.api.Places;
 import com.google.android.libraries.places.api.model.Place;
 import com.google.android.libraries.places.api.net.PlacesClient;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 
-public class MapScreen extends Fragment implements View.OnClickListener, OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
+public class MapFragment extends Fragment implements View.OnClickListener, OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
     private boolean _locationPermissionGranted = false;
     private MapView _mapView;
     private GoogleMap _map;
     private FusedLocationProviderClient _fusedLocationClient;
     private boolean _mapIsReady;
-    private MainMenu _mainMenu = new MainMenu();
 
     private Fragment _currentFragment;
     private LatLng _yourPos;
@@ -75,7 +67,7 @@ public class MapScreen extends Fragment implements View.OnClickListener, OnMapRe
     private Place _place;
     private int _invokeCounter = 0;
     private Map<String, String> _placesOnMap = new HashMap<>();
-    private MainScreen _mainScreen;
+    private LecturersActivity _lecturersActivity;
     private boolean _lockedOnPlace;
 
     public boolean getLockedOnPlace () {
@@ -88,14 +80,6 @@ public class MapScreen extends Fragment implements View.OnClickListener, OnMapRe
 
     public Map<String, String> getPlacesOnMap () {
         return _placesOnMap;
-    }
-
-    public MainMenu getMainMenu() {
-        return _mainMenu;
-    }
-
-    public void setMainMenu(MainMenu mainMenu) {
-        _mainMenu = mainMenu;
     }
 
     public void getLastKnownLocationWithPermissionCheck() {
@@ -288,20 +272,18 @@ public class MapScreen extends Fragment implements View.OnClickListener, OnMapRe
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.map_screen_module, container, false);
+        return inflater.inflate(R.layout.fragment_map, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        _mainScreen = (MainScreen) getActivity();
+        _lecturersActivity = (LecturersActivity) getActivity();
         Places.initialize(getActivity(), BuildConfig.GoogleSecAPIKEY);
         _placesClient = Places.createClient(getActivity());
         initGoogleMaps(savedInstanceState, view);
         _fragmentManager = getChildFragmentManager();
         _fragmentTransaction = _fragmentManager.beginTransaction();
-        _fragmentTransaction.add(R.id.map_screen_fragment_container, _mainMenu);
-        _currentFragment = _mainMenu;
         _fragmentTransaction.commit();
     }
 

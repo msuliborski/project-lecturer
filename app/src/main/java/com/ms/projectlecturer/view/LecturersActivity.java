@@ -5,8 +5,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import com.facebook.AccessToken;
+import com.facebook.login.LoginManager;
 import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -34,18 +38,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Locale;
 
 
-public class MainScreen extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+public class LecturersActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
 
     private static Context _context;
     private ImageView _profileImage;
     private Button _food;
-    private Button _accommodation;
-    private Button _facilities;
-    private Button _events;
     private Button _credits;
     private Button _profile;
     private Button _home;
+    private Button _signout;
+    private Button _wikamp;
+    private Button _settings;
     private AlphaAnimation _buttonClick = new AlphaAnimation(1f, 0.8f);
 
     private ActionBarDrawerToggle _toggle;
@@ -54,11 +58,11 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     private ProgramClient _programClient = ProgramClient.getInstance();
     private FirebaseAuth _auth = FirebaseAuth.getInstance();
     @Getter
-    private ListView listView = new ListView();
-    private MapScreen _mapScreenFragment = new MapScreen();
-    private Credits _creditsFragment = new Credits();
-    private MainMenu _mainMenuFragment;
-    private Settings _settingsFragment = new Settings();
+    private LecturersListFragment _lecturersListFragment = new LecturersListFragment();
+    private MapFragment _mapFragmentFragment = new MapFragment();
+    private SidebarFragment _sidebarFragment = new SidebarFragment();
+    private CreditsFragment _creditsFragmentFragment = new CreditsFragment();
+    private SettingsFragment _settingsFragmentFragment = new SettingsFragment();
     private Fragment _currentFragment;
     private FragmentManager _fragmentManager = getSupportFragmentManager();
     private FragmentTransaction _fragmentTransaction;
@@ -75,16 +79,29 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         return _conf;
     }
 
-    public Settings getSettingsFragment () {
-        return _settingsFragment;
+    public SettingsFragment getSettingsFragment () {
+        return _settingsFragmentFragment;
     }
 
-    public MapScreen getMapScreenFragment () {
-        return _mapScreenFragment;
+    public MapFragment getMapScreenFragment () {
+        return _mapFragmentFragment;
     }
 
     public Fragment getCurrentFragment() {
         return _currentFragment;
+    }
+
+    public Fragment getSettinsFragment() {
+        return _settingsFragmentFragment;
+    }
+
+    public Fragment getLecturersFragment() {
+        return _lecturersListFragment;
+    }
+
+
+    public Fragment getCreditsScreenFragment() {
+        return _creditsFragmentFragment;
     }
 
     public void setCurrentFragment(Fragment fragment) {
@@ -109,6 +126,14 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         _context = this;
+
+        View sidebarView = getLayoutInflater().inflate(R.layout.fragment_sidebar, null);
+//        TextView text = (TextView) inflatedView.findViewById(R.id.text_view);
+//        text.setText("Hello!");
+
+
+
+
         _pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         _resources = getResources();
         _conf = _resources.getConfiguration();
@@ -119,7 +144,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
                 setLocale(lang);
             }
         }
-        setContentView(R.layout.activity_main_screen);
+        setContentView(R.layout.activity_lecturers);
         _buttonClick.setDuration(300);
         _drawerLayout = findViewById(R.id.drawer_layout);
         _toggle = new ActionBarDrawerToggle(this, _drawerLayout, R.string.open, R.string.close);
@@ -128,35 +153,36 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 
-        _profileImage = findViewById(R.id.profile);
+        _profileImage = sidebarView.findViewById(R.id.profile);
 
         String imgUrl = _auth.getCurrentUser().getPhotoUrl().toString();
         Glide.with(this).load(imgUrl).apply(RequestOptions.circleCropTransform()).into(_profileImage);
 
-        _food = findViewById(R.id.foodButton);
+        _food = sidebarView.findViewById(R.id.foodButton);
         _food.setOnClickListener(this);
-        _home = findViewById(R.id.home);
+        _home = sidebarView.findViewById(R.id.home);
         _home.setOnClickListener(this);
-        _accommodation = findViewById(R.id.stayButton);
-        _accommodation.setOnClickListener(this);
-        _events = findViewById(R.id.eventsButton);
-        _events.setOnClickListener(this);
-        _facilities = findViewById(R.id.facilitiesButton);
-        _facilities.setOnClickListener(this);
-        _credits = findViewById(R.id.creditsButton);
+        _signout = sidebarView.findViewById(R.id.sign_out);
+        _signout.setOnClickListener(this);
+        _wikamp = sidebarView.findViewById(R.id.wikamp);
+        _wikamp.setOnClickListener(this);
+        _wikamp.setText("kurwa");
+        _settings = sidebarView.findViewById(R.id.sett);
+        _settings.setOnClickListener(this);
+        _credits = sidebarView.findViewById(R.id.creditsButton);
         _credits.setOnClickListener(this);
-        _profile = findViewById(R.id.profileButton);
+        _profile = sidebarView.findViewById(R.id.profileButton);
         _profile.setOnClickListener(this);
-        _mainMenuFragment = _mapScreenFragment.getMainMenu();
         _fragmentTransaction = _fragmentManager.beginTransaction();
-        _fragmentTransaction.add(R.id.screen_area, _creditsFragment);
-        _fragmentTransaction.hide(_creditsFragment);
-        _fragmentTransaction.add(R.id.screen_area, _settingsFragment);
-        _fragmentTransaction.hide(_settingsFragment);
-        _fragmentTransaction.add(R.id.screen_area, _mapScreenFragment);
-        _fragmentTransaction.hide(_mapScreenFragment);
-        _fragmentTransaction.add(R.id.screen_area, listView);
-        _currentFragment = listView;
+        _fragmentTransaction.add(R.id.screen_area, _creditsFragmentFragment);
+        _fragmentTransaction.add(R.id.nav_area, _sidebarFragment);
+        _fragmentTransaction.hide(_creditsFragmentFragment);
+        _fragmentTransaction.add(R.id.screen_area, _settingsFragmentFragment);
+        _fragmentTransaction.hide(_settingsFragmentFragment);
+        _fragmentTransaction.add(R.id.screen_area, _mapFragmentFragment);
+        _fragmentTransaction.hide(_mapFragmentFragment);
+        _fragmentTransaction.add(R.id.screen_area, _lecturersListFragment);
+        _currentFragment = _lecturersListFragment;
         _fragmentTransaction.commit();
 
     }
@@ -166,26 +192,34 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
     @Override
     public void onClick(View view) {
 
+
         Fragment fragment = null;
 
         if (view == _food) {
             view.startAnimation(_buttonClick);
-            fragment = _mapScreenFragment;
+            fragment = _mapFragmentFragment;
             Log.d("tag", "onComplete: kurwa3");
         } else if (view == _profile) {
             view.startAnimation(_buttonClick);
         } else if (view == _credits) {
             view.startAnimation(_buttonClick);
-            fragment = _creditsFragment;
-        } else if (view == _accommodation) {
+            fragment = _creditsFragmentFragment;
+        } else if (view == _settings) {
             view.startAnimation(_buttonClick);
-        } else if (view == _events) {
-            view.startAnimation(_buttonClick);
-        } else if (view == _facilities) {
-            view.startAnimation(_buttonClick);
+            fragment = _settingsFragmentFragment;
         } else if (view == _home) {
             view.startAnimation(_buttonClick);
-            fragment = listView;
+            fragment = _lecturersListFragment;
+        } else if (view == _signout) {
+            _auth.signOut();
+            LoginManager.getInstance().logOut();
+            AccessToken.setCurrentAccessToken(null);
+            view.startAnimation(_buttonClick);
+            this.finish();
+        } else if (view == _wikamp) {
+            view.startAnimation(_buttonClick);
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.wiki)));
+            startActivity(browserIntent);
         }
         setCurrentFragment(fragment);
     }
@@ -207,7 +241,7 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onBackPressed() {
-        if (_currentFragment == _mapScreenFragment) {
+        if (_currentFragment == _mapFragmentFragment) {
             super.onBackPressed();
         }
     }
@@ -218,9 +252,10 @@ public class MainScreen extends AppCompatActivity implements View.OnClickListene
         Configuration conf = _resources.getConfiguration();
         conf.locale = locale;
         _resources.updateConfiguration(conf, dm);
-        Intent refresh = new Intent(this, MainScreen.class);
+        Intent refresh = new Intent(this, LecturersActivity.class);
         startActivity(refresh);
         finish();
     }
+
 
 }

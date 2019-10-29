@@ -7,6 +7,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,27 +19,19 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import com.ms.projectlecturer.R;
-import com.ms.projectlecturer.model.Enquire;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.ms.projectlecturer.util.RecyclerViewAdapter;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
-public class ListView extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class LecturersListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private RecyclerView _recyclerView;
     private RecyclerViewAdapter _adapter;
     private RecyclerView.LayoutManager _layoutManager;
-    private MapScreen _mapScreen;
-    private MainScreen _mainScreen;
+    private MapFragment _mapFragment;
+    private LecturersActivity _lecturersActivity;
     private Spinner _spinner;
     private String[] _spinnerPaths;
     private LayoutInflater _inflater;
@@ -76,7 +69,7 @@ public class ListView extends Fragment implements View.OnClickListener, AdapterV
 
         _inflater = inflater;
 
-                return inflater.inflate(R.layout.food_module, container, false);
+                return inflater.inflate(R.layout.fragment_lecturers_list, container, false);
     }
 
     @Override
@@ -88,9 +81,9 @@ public class ListView extends Fragment implements View.OnClickListener, AdapterV
                 getResources().getString(R.string.this_week),
                 getResources().getString(R.string.this_month),
                 getResources().getString(R.string.top_spinner)};
-        _mainScreen = (MainScreen) getActivity();
+        _lecturersActivity = (LecturersActivity) getActivity();
         _resources = getResources();
-        _mapScreen = _mainScreen.getMapScreenFragment();
+        _mapFragment = _lecturersActivity.getMapScreenFragment();
         _recyclerView = view.findViewById(R.id.food_recycler_view);
         _spinner = view.findViewById(R.id.spinner);
         _topButton = view.findViewById(R.id.top);
@@ -113,6 +106,7 @@ public class ListView extends Fragment implements View.OnClickListener, AdapterV
 
     @Override
     public void onClick(View view) {
+        Log.wtf("chuj", "chuj");
         if (view == _topButton) {
             view.startAnimation(_buttonClick);
             _spinner.setSelection(4);
@@ -120,7 +114,7 @@ public class ListView extends Fragment implements View.OnClickListener, AdapterV
             view.startAnimation(_buttonClick);
             _spinner.setSelection(0);
         } else if (view == _addEnquireButton) {
-            _mainScreen.setCurrentFragment(_mapScreen);
+            _lecturersActivity.setCurrentFragment(_mapFragment);
         }
     }
 

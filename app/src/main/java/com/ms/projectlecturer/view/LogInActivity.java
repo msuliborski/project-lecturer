@@ -36,7 +36,7 @@ import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class LogInScreen extends AppCompatActivity implements View.OnClickListener {
+public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
 
     private SignInButton _googleBtn;
     private LoginButton _facebookBtn;
@@ -67,11 +67,11 @@ public class LogInScreen extends AppCompatActivity implements View.OnClickListen
 
         _error = builder.create();
 
-        _mainScreen = new Intent(this, MainScreen.class);
+        _mainScreen = new Intent(this, LecturersActivity.class);
 
 
 
-        setContentView(R.layout.activity_log_in_screen);
+        setContentView(R.layout.activity_log_in);
         _googleBtn = findViewById(R.id.google);
         _facebookBtn = findViewById(R.id.facebook);
         _progressDialog = new ProgressDialog(this);
@@ -139,7 +139,7 @@ public class LogInScreen extends AppCompatActivity implements View.OnClickListen
                 // Google Sign In failed, update UI appropriately
                 _progressDialog.dismiss();
                 e.printStackTrace();
-                Toast.makeText(LogInScreen.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LogInActivity.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
 
             }
         }
@@ -165,7 +165,7 @@ public class LogInScreen extends AppCompatActivity implements View.OnClickListen
                         } else {
                             // If sign in fails, display a message to the user.
                             _progressDialog.dismiss();
-                            Toast.makeText(LogInScreen.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LogInActivity.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
 
                         }
 

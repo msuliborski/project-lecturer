@@ -1,4 +1,4 @@
-package com.ms.projectlecturer.view;
+package com.ms.projectlecturer.util;
 
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,7 +25,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = _inflater.inflate(R.layout.recycler_row, parent, false);
+        View view = _inflater.inflate(R.layout.element_lecturer, parent, false);
         return new ViewHolder(view);
     }
 

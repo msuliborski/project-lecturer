@@ -16,12 +16,12 @@ import android.widget.Spinner;
 
 import com.ms.projectlecturer.R;
 
-public class Settings extends Fragment implements AdapterView.OnItemSelectedListener {
+public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private Spinner _spinner;
     private String[] _spinnerPaths;
-    private MainScreen _mainScreen;
-    private MapScreen _mapScreen;
+    private LecturersActivity _lecturersActivity;
+    private MapFragment _mapFragment;
     private SharedPreferences _pref;
     private SharedPreferences.Editor _editor;
     private Configuration _conf;
@@ -37,7 +37,7 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.settings, container, false);
+        return inflater.inflate(R.layout.fragment_settings, container, false);
     }
 
     @Override
@@ -52,10 +52,10 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         _spinner.setAdapter(adapter);
         _spinner.setOnItemSelectedListener(this);
-        _mainScreen = (MainScreen) getActivity();
-        _mapScreen = _mainScreen.getMapScreenFragment();
-        _pref = _mainScreen.getPref();
-        _conf = _mainScreen.getConf();
+        _lecturersActivity = (LecturersActivity) getActivity();
+        _mapFragment = _lecturersActivity.getMapScreenFragment();
+        _pref = _lecturersActivity.getPref();
+        _conf = _lecturersActivity.getConf();
         setLanguageOnSpinner(_conf.locale.getLanguage());
     }
 
@@ -83,7 +83,7 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
                     _editor = _pref.edit();
                     _editor.putString("lang_code", "en");
                     _editor.commit();
-                    _mainScreen.setLocale("en");
+                    _lecturersActivity.setLocale("en");
                 }
                 break;
             case 1:
@@ -92,7 +92,7 @@ public class Settings extends Fragment implements AdapterView.OnItemSelectedList
                     _editor.putString("lang_code", "pl");
                     _editor.commit();
                     Log.d("tag", "onComplete: " + _pref.getString("lang_code", "en"));
-                    _mainScreen.setLocale("pl");
+                    _lecturersActivity.setLocale("pl");
                 }
                 break;
         }
