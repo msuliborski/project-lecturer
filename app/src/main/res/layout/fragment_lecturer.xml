@@ -1,85 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/white">
-
-        <RelativeLayout
-            android:id="@+id/first"
-            android:layout_width="fill_parent"
-            android:layout_height="220dp"
-            android:layout_marginTop="5dp">
-
-            <ImageView
-                android:id="@+id/food"
-                android:layout_width="193dp"
-                android:layout_height="47dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="86dp"
-                android:layout_marginLeft="86dp"
-                android:layout_marginTop="115dp"
-                android:layout_marginEnd="81dp"
-                android:layout_marginRight="81dp"
-                android:src="@drawable/title"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="0dp" />
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
 
 
-            <!--<TextView
-                android:id="@+id/filter"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="0dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_alignParentRight="true"
-                android:layout_marginStart="90dp"
-                android:layout_marginLeft="90dp"
-                android:layout_marginTop="179dp"
-                android:layout_marginEnd="50dp"
-                android:layout_marginRight="55dp"
-                android:text="@string/filter"
-                android:textSize="14sp"
-                android:textColor="@color/browser_actions_text_color" />-->
-
-        </RelativeLayout>
+    <ImageView
+        android:id="@+id/avatarImageView"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="center"
+        android:src="@drawable/title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/empty_avatar" />
 
     <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
+        android:id="@+id/lecturerNameTextView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="imie nazwisko" />
+        android:text="mgr. inż. Jan Kowalski"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="@+id/avatarImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/avatarImageView"
+        app:layout_constraintTop_toTopOf="@+id/avatarImageView"
+        app:layout_constraintVertical_bias="0.495" />
+
+    <TextView
+        android:id="@+id/avaliabilityTextView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Now avaliable at: \n Building: B9 \n Room: 409"
+        android:textAlignment="textStart"
+        android:textSize="20dp"
+        app:layout_constraintEnd_toStartOf="@+id/mapButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/avatarImageView" />
 
     <Button
-        android:id="@+id/button2"
-        android:layout_width="match_parent"
+        android:id="@+id/mapButton"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="mapa" />
+        android:text="mapa"
+        app:layout_constraintBottom_toBottomOf="@id/avaliabilityTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/avaliabilityTextView"
+        app:layout_constraintTop_toTopOf="@+id/avaliabilityTextView" />
 
-    <!-- <RelativeLayout
-         android:id="@+id/map_container_food"
-         android:layout_width="match_parent"
-         android:layout_height="0dp"
-         android:layout_weight="50">
 
-         <com.google.android.gms.maps.MapView xmlns:android="http://schemas.android.com/apk/res/android"
-             android:id="@+id/map_food"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent"
-             android:layout_alignParentTop="true"
-             android:layout_marginTop="0dp" />
-     </RelativeLayout>-->
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
 
