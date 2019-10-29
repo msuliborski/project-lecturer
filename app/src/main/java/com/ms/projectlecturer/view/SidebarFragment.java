@@ -31,6 +31,7 @@ public class SidebarFragment extends Fragment implements View.OnClickListener{
     private Button _home;
     private Button _signout;
     private Button _wikamp;
+    private Button _lecturer;
     private Button _settings;
 
 
@@ -66,6 +67,8 @@ public class SidebarFragment extends Fragment implements View.OnClickListener{
         _food.setOnClickListener(this);
         _home = view.findViewById(R.id.home);
         _home.setOnClickListener(this);
+        _lecturer = view.findViewById(R.id.lecturerButton);
+        _lecturer.setOnClickListener(this);
         _signout = view.findViewById(R.id.sign_out);
         _signout.setOnClickListener(this);
         _wikamp = view.findViewById(R.id.wikamp);
@@ -94,6 +97,9 @@ public class SidebarFragment extends Fragment implements View.OnClickListener{
         } else if (view == _settings) {
             view.startAnimation(_buttonClick);
             fragment = _lecturersActivity.getSettinsFragment();
+        } else if (view == _lecturer) {
+            view.startAnimation(_buttonClick);
+            fragment = _lecturersActivity.getLecturerFragment();
         } else if (view == _home) {
             view.startAnimation(_buttonClick);
             fragment = _lecturersActivity.getLecturersFragment();
