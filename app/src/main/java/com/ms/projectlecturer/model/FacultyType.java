@@ -6,5 +6,5 @@ import lombok.Getter;
 public enum FacultyType {
     MECH("W Mech."), WEEIA("WEEIA"), CHEM("W Chem."), FTIMS("W FTIMS");
     @Getter
-    String label;
+    private String label;
 }

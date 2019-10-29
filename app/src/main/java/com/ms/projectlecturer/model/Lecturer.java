@@ -28,7 +28,7 @@ public class Lecturer implements Comparable<Lecturer> {
     private String firstName;
     private String lastName;
     private FacultyType facultyType;
-    private HashMap<Period, String> schedule; // period, room_id
+    //private HashMap<Period, String> schedule; // period, room_id
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -36,7 +36,15 @@ public class Lecturer implements Comparable<Lecturer> {
         result.put("firstName", firstName);
         result.put("lastName", lastName);
         result.put("facultyType", facultyType);
-        result.put("schedule", schedule);
+        //result.put("schedule", schedule);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return  new StringBuilder().append("Name: ").append(firstName).append("\n")
+                .append("Surname: ").append(lastName).append("\n")
+                .append("Faculty: ").append(facultyType.getLabel()).append("\n")
+                .toString();
     }
 }

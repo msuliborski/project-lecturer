@@ -18,14 +18,23 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.ms.projectlecturer.R;
 import com.google.firebase.database.ValueEventListener;
+import com.ms.projectlecturer.model.Lecturer;
 import com.ms.projectlecturer.util.RecyclerViewAdapter;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
-public class LecturersListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class LecturersListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener,
+        RecyclerViewAdapter.ItemClickListener {
 
     private RecyclerView _recyclerView;
     private RecyclerViewAdapter _adapter;
@@ -42,7 +51,8 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     private List<String> _dataset;
     private ValueEventListener _currentListener;
     private Resources _resources;
-
+    private DatabaseReference _lecturersReference = FirebaseDatabase.getInstance().getReference("Lecturers");
+    private LecturersListFragment _lecturersListFragment = this;
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view,
@@ -54,13 +64,10 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
         // TODO Auto-generated method stub
     }
 
-    private class ModuleItemClickListener implements  RecyclerViewAdapter.ItemClickListener {
-        @Override
-        public void onItemClick(View v,int pos) {
+    @Override
+    public void onItemClick(View view, int position) {
 
-        }
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
@@ -102,11 +109,34 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
         _allButton.setOnClickListener(this);
         _addEnquireButton.setOnClickListener(this);
         _buttonClick.setDuration(300);
+
+        _lecturersReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                _dataset = new ArrayList<>();
+                ArrayList<Lecturer> lecturers = new ArrayList<>();
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    Lecturer l = childSnapshot.getValue(Lecturer.class);
+                }
+                Collections.sort(lecturers);
+                Collections.reverse(lecturers);
+                for (Lecturer l : lecturers) {
+                    _dataset.add(l.toString());
+                }
+                _adapter = new RecyclerViewAdapter(_inflater, _dataset);
+                _recyclerView.setAdapter(_adapter);
+                _adapter.setClickListener(_lecturersListFragment);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
     public void onClick(View view) {
-        Log.wtf("chuj", "chuj");
         if (view == _topButton) {
             view.startAnimation(_buttonClick);
             _spinner.setSelection(4);
