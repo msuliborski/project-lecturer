@@ -140,17 +140,17 @@ public class Enquire implements Comparable<Enquire> {
                 "Number of answers: " + _answerCount;
     }*/
 
-    @Override
-    public String toString() {
-        Resources resources = LecturersActivity.getContext().getResources();
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-        String date = sdf.format(_creationDate);
-
-        return resources.getString(R.string.author) + ": " + _authorNickname + "\n" +
-                resources.getString(R.string.posted) + ": " + date + "\n" +
-                resources.getString(R.string.enquireContent) + ": " + _content + "\n" +
-                resources.getString(R.string.numberOfAnswers) + ": " + _answerCount;
-    }
+//    @Override
+//    public String toString() {
+//        Resources resources = LecturersActivity.getContext().getResources();
+//        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+//        String date = sdf.format(_creationDate);
+//
+//        return resources.getString(R.string.author) + ": " + _authorNickname + "\n" +
+//                resources.getString(R.string.posted) + ": " + date + "\n" +
+//                resources.getString(R.string.enquireContent) + ": " + _content + "\n" +
+//                resources.getString(R.string.numberOfAnswers) + ": " + _answerCount;
+//    }
 
 
 

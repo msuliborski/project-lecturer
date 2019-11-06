@@ -34,8 +34,6 @@ import com.bumptech.glide.request.RequestOptions;
 import com.ms.projectlecturer.R;
 import com.ms.projectlecturer.controller.ProgramClient;
 import com.google.firebase.auth.FirebaseAuth;
-import com.ms.projectlecturer.model.FacultyType;
-import com.ms.projectlecturer.util.LecturerSpawner;
 
 import java.util.Locale;
 
@@ -155,7 +153,7 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
         setContentView(R.layout.activity_lecturers);
         _buttonClick.setDuration(300);
         _drawerLayout = findViewById(R.id.drawer_layout);
-        _toggle = new ActionBarDrawerToggle(this, _drawerLayout, R.string.open, R.string.close);
+        _toggle = new ActionBarDrawerToggle(this, _drawerLayout, 0, 0);
         _drawerLayout.addDrawerListener(_toggle);
         _toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -244,7 +242,7 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
             this.finish();
         } else if (view == _wikamp) {
             view.startAnimation(_buttonClick);
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.wiki)));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.wikamp)));
             startActivity(browserIntent);
         }
         setCurrentFragment(fragment);

@@ -111,7 +111,7 @@ public class SidebarFragment extends Fragment implements View.OnClickListener{
             _lecturersActivity.finish();
         } else if (view == _wikamp) {
             view.startAnimation(_buttonClick);
-            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.wiki)));
+            Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getResources().getString(R.string.wikamp)));
             startActivity(browserIntent);
         }
         _lecturersActivity.setCurrentFragment(fragment);

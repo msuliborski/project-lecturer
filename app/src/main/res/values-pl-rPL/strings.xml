@@ -1,63 +1,29 @@
 <resources>
-    <string name="app_name">PROJECT: Lecturer</string>
-    <string name="google_map_api_key">AIzaSyBcJUj6duPmHPuCmag-veFK1bytff8h5yc</string>
-    <string name="facebook_app_id">2341358939256022</string>
-    <string name="fb_login_protocol_scheme">fb2341358939256022</string>
-    <string name="login_text">Logowanie si\u0119</string>
-    <string name="sidebarButtonDescription">Przycisk do otwierania sidebara z menu</string>
-    <string name="open">Open</string>
-    <string name="close">Close</string>
-    <string name="app">Aplikacja</string>
-    <string name="database">Dodaj pytanie</string>
-    <string name="about">O Łodzi</string>
-    <string name="settings">Ustawienia</string>
-    <string name="signout">Wyloguj</string>
-    <string name="profile">Profil</string>
-    <string name="food">Jedzenie</string>
-    <string name="stay">Pobyt</string>
-    <string name="events">Wydarzenia</string>
-    <string name="facilities">Udogodnienia</string>
-    <string name="credits">Autorzy</string>
-    <string name="random">+</string>
-    <string name="all">all</string>
-    <string name="top">top</string>
-    <string name="search">Szukaj</string>
-    <string name="filter">filtry</string>
-    <string name="this_day">Maks. dzień temu</string>
-    <string name="this_week">Maks. tydzień temu</string>
-    <string name="this_month">Maks. miesiąc temu</string>
-    <string name="top_spinner">Najpopularniejsze</string>
-    <string name="All">Wszystkie</string>
-    <string name="near">near</string>
-    <string name="dolar">$</string>
-    <string name="now">now</string>
-    <string name="answer">Odpowiedz na post</string>
-    <string name="wiki">https://edu.p.lodz.pl/</string>
-    <string name="description">Jesteśmy grupą studentów IFE z kierunku IT, którzy w ramach projektu PBL (ang. Problem Based Learning) stworzyli tę aplikację.</string>
-    <string name="fire"> Fire inside the mountain - coś niespodziewanego, uzewnętrznienie siły i witalnej mocy.
-        Inicjały ukryte w logo zespołu są symbolem naszego nieokiełznanego zapału i niezłomnego podążania w kierunku wyznaczonego celu.</string>
-    <string name="postEnquire">Dodaj pytanie</string>
-    <string name="postAnswer">Dodaj odpowiedź</string>
-    <string name="username">Nazwa użytkownika</string>
+
+    <!--    Main-->
     <string name="logging">Logowanie użytkownika…</string>
     <string name="signInError">Błąd logowania!</string>
     <string name="signInErrorMsg">Twoje konto jest już prawdopodobnie powiązane z kontem Google, wypróbuj tej metody logowania!</string>
-    <string name="enquireContent">Treść pytania</string>
-    <string name="enquireType">Typ pytania:</string>
-    <string name="answerChoose">Musisz wybrać jakieś miejsce, żeby zamieścić odpowiedź!</string>
-    <string name="youHaveChosen">Wybrałeś</string>
-    <string name="asAnAnswer">jako odpowiedź</string>
-    <string name="yourInquiry">Twoje pytanie musi składać się z conajmniej 8 znaków!</string>
-    <string name="yourInquiryPosted">Twoje pytanie zostało zamieszczone</string>
+
+    <!--    Settings-->
+    <string name="settings">Ustawienia</string>
     <string name="language">Język:</string>
-    <string name="placeName">Nazwa miejsca</string>
-    <string name="placeType">Najczęściej wybierana kategoria</string>
-    <string name="chosenAsAnswer">Wybrane jako odpowiedź </string>
-    <string name="times"> raz(y)</string>
-    <string name="author">Autor</string>
-    <string name="posted">Zamieszczono</string>
-    <string name="numberOfAnswers">Liczba odpowiedzi</string>
-    <string name="selectedPlace">Wybrane miejsce</string>
-    <string name="nothing">&#60;brak&#62;</string>
-    <string name="loading">Ładowanie…</string>
+
+    <!--    Credits-->
+    <string name="credits">Podziękowania</string>
+
+    <!--    Lecturer list-->
+    <string name="searchHint">Wyszukaj wykładowcę</string>
+
+    <!--    Side bar-->
+    <string name="profileButton">Profil</string>
+    <string name="mapButton">Mapa</string>
+    <string name="lecturerButton">Wykładowca</string>
+    <string name="lecturersButton">Wykładowcy</string>
+    <string name="wikampButton">WIKAMP</string>
+    <string name="settingsButton">Ustawienia</string>
+    <string name="creditsButton">Podziękowania</string>
+    <string name="logoutButton">Wyloguj się</string>
+
+
 </resources>

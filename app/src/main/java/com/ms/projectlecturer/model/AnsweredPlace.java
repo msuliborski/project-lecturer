@@ -148,16 +148,16 @@ public class AnsweredPlace {
         }
 
 
-        public String toString(boolean withName) {
-            Resources resources = LecturersActivity.getContext().getResources();
-            if (withName) {
-                return resources.getString(R.string.placeName) + ": " + _placeName + "\n" +
-                        resources.getString(R.string.chosenAsAnswer) + " " + new Integer(_enquireCount).toString() + " " +
-                        resources.getString(R.string.times);
-            }
-            return resources.getString(R.string.chosenAsAnswer) + " " + new Integer(_enquireCount).toString() + " " +
-                    resources.getString(R.string.times);
-        }
+//        public String toString(boolean withName) {
+//            Resources resources = LecturersActivity.getContext().getResources();
+//            if (withName) {
+//                return resources.getString(R.string.placeName) + ": " + _placeName + "\n" +
+//                        resources.getString(R.string.chosenAsAnswer) + " " + new Integer(_enquireCount).toString() + " " +
+//                        resources.getString(R.string.times);
+//            }
+//            return resources.getString(R.string.chosenAsAnswer) + " " + new Integer(_enquireCount).toString() + " " +
+//                    resources.getString(R.string.times);
+//        }
 
 
     }
@@ -170,25 +170,25 @@ public class AnsweredPlace {
         }
     }
 
-    public String toString() {
-        Resources resources = LecturersActivity.getContext().getResources();
-        String type = "";
-        switch (_mostPopularEnquireType) {
-            case Events:
-                type = resources.getString(R.string.events);
-                break;
-            case Food:
-                type = resources.getString(R.string.food);
-                break;
-            case Facilities:
-                type = resources.getString(R.string.facilities);
-                break;
-            case Accomodation:
-                type = resources.getString(R.string.stay);
-                break;
-        }
-
-        return resources.getString(R.string.placeName) + ": " + _placeName + "\n" +
-                resources.getString(R.string.placeType) + ": " + type;
-    }
+//    public String toString() {
+//        Resources resources = LecturersActivity.getContext().getResources();
+//        String type = "";
+//        switch (_mostPopularEnquireType) {
+//            case Events:
+//                type = resources.getString(R.string.events);
+//                break;
+//            case Food:
+//                type = resources.getString(R.string.food);
+//                break;
+//            case Facilities:
+//                type = resources.getString(R.string.facilities);
+//                break;
+//            case Accomodation:
+//                type = resources.getString(R.string.stay);
+//                break;
+//        }
+//
+//        return resources.getString(R.string.placeName) + ": " + _placeName + "\n" +
+//                resources.getString(R.string.placeType) + ": " + type;
+//    }
 }
