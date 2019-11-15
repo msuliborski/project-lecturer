@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
+    android:gravity="center"
+    android:background="@color/sidebarGrey">
 
     <Space
         android:layout_width="match_parent"
@@ -26,10 +27,12 @@
 
     <Button
         android:id="@+id/profileButton"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:text="@string/profileButton"
-        android:textAlignment="center" />
+        android:textColor="@color/white"
+        android:textAlignment="center"
+        android:background="@drawable/list_element"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="30dp" />
@@ -37,9 +40,11 @@
 
     <Button
         android:id="@+id/foodButton"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="@string/mapButton"/>
+        android:text="@string/mapButton"
+        android:textColor="@color/white"
+        android:background="@drawable/list_element"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -47,9 +52,11 @@
 
     <Button
         android:id="@+id/lecturerButton"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="@string/lecturerButton"/>
+        android:text="@string/lecturerButton"
+        android:textColor="@color/white"
+        android:background="@drawable/list_element"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -57,9 +64,11 @@
 
     <Button
         android:id="@+id/home"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="@string/lecturersButton"/>
+        android:text="@string/lecturersButton"
+        android:textColor="@color/white"
+        android:background="@drawable/list_element"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -67,9 +76,11 @@
 
     <Button
         android:id="@+id/wikamp"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="@string/wikampButton"/>
+        android:text="@string/wikampButton"
+        android:textColor="@color/white"
+        android:background="@drawable/list_element"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -77,9 +88,11 @@
 
     <Button
         android:id="@+id/sett"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="@string/settingsButton"/>
+        android:text="@string/settingsButton"
+        android:textColor="@color/white"
+        android:background="@drawable/list_element"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -87,9 +100,11 @@
 
     <Button
         android:id="@+id/creditsButton"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="@string/creditsButton"/>
+        android:text="@string/creditsButton"
+        android:textColor="@color/white"
+        android:background="@drawable/list_element"/>
     <Space
         android:layout_width="match_parent"
         android:layout_height="10dp" />
@@ -97,8 +112,10 @@
 
     <Button
         android:id="@+id/sign_out"
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="50dp"
-        android:text="@string/logoutButton"/>
+        android:text="@string/logoutButton"
+        android:textColor="@color/white"
+        android:background="@drawable/list_element"/>
 
 </LinearLayout>
