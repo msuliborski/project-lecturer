@@ -3,4 +3,8 @@
     <color name="colorPrimary">#5D6063</color>
     <color name="colorPrimaryDark">#414144</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="lightBlueBackground">#94F0FD</color>
+    <color name="darkBlueList">#07191C</color>
+    <color name="sidebarGrey">#E2E2E2</color>
+    <color name="white">#FFFFFF</color>
 </resources>
