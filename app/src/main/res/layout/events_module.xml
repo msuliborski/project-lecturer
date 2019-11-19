@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/firstEvents"
+        android:layout_width="fill_parent"
+        android:layout_height="220dp"
+        android:layout_marginTop="5dp">
+
+        <ImageView
+            android:id="@+id/events"
+            android:layout_width="216dp"
+            android:layout_height="49dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="72dp"
+            android:layout_marginLeft="72dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="72dp"
+            android:layout_marginRight="72dp"
+            android:src="@drawable/events" />
+
+        <RelativeLayout
+            android:id="@+id/eventssearch"
+            android:layout_width="278dp"
+            android:layout_height="41dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="55dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="60dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginRight="55dp"
+            android:background="@drawable/eventssearch">
+
+            <EditText
+                android:id="@+id/editTextEvents"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                android:layout_marginStart="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="0dp"
+                android:ems="10"
+                android:hint="@string/search"
+                android:inputType="text"
+                android:textSize="14sp" />
+        </RelativeLayout>
+
+
+        <Button
+            android:id="@+id/add_enquire_events"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="57dp"
+            android:layout_marginLeft="57dp"
+            android:layout_marginTop="106dp"
+            android:layout_marginEnd="-62dp"
+            android:layout_marginRight="-62dp"
+            android:layout_marginBottom="57dp"
+            android:layout_toStartOf="@+id/topEvents"
+            android:layout_toLeftOf="@+id/topEvents"
+            android:background="@drawable/empty"
+            android:text="@string/random"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/topEvents"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_alignStart="@+id/eventssearch"
+            android:layout_alignLeft="@+id/eventssearch"
+            android:layout_alignEnd="@+id/eventssearch"
+            android:layout_alignRight="@+id/eventssearch"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="97dp"
+            android:layout_marginLeft="97dp"
+            android:layout_marginTop="107dp"
+            android:layout_marginEnd="91dp"
+            android:layout_marginRight="91dp"
+            android:layout_marginBottom="56dp"
+            android:background="@drawable/empty"
+            android:text="@string/top"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/all_events"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_alignStart="@+id/eventssearch"
+            android:layout_alignLeft="@+id/eventssearch"
+            android:layout_alignEnd="@+id/eventssearch"
+            android:layout_alignRight="@+id/eventssearch"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="188dp"
+            android:layout_marginLeft="188dp"
+            android:layout_marginTop="106dp"
+            android:layout_marginEnd="0dp"
+            android:layout_marginRight="0dp"
+            android:layout_marginBottom="57dp"
+            android:background="@drawable/empty"
+            android:text="@string/all"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+
+        <Spinner
+            android:id="@+id/eventsspinner"
+            android:layout_width="278dp"
+            android:layout_height="41dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginStart="55dp"
+            android:layout_marginLeft="55dp"
+            android:layout_marginTop="168dp"
+            android:layout_marginEnd="55dp"
+            android:layout_marginRight="55dp"
+            android:background="@drawable/eventsfilters"
+            android:spinnerMode="dropdown"
+            android:textAlignment="center"/>
+
+        <!--<TextView
+            android:id="@+id/eventsfilter"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="90dp"
+            android:layout_marginLeft="90dp"
+            android:layout_marginTop="179dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginRight="55dp"
+            android:layout_marginBottom="0dp"
+            android:text="@string/filter"
+            android:textColor="@color/browser_actions_text_color"
+            android:textSize="14sp" />-->
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/events_recycler_view"
+        android:scrollbars="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="50">
+
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</LinearLayout>
