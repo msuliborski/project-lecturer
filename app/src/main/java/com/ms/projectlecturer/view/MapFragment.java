@@ -25,7 +25,6 @@ import android.widget.Toast;
 
 import com.ms.projectlecturer.BuildConfig;
 import com.ms.projectlecturer.R;
-import com.ms.projectlecturer.model.Enquire;
 import com.ms.projectlecturer.util.Constants;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -348,25 +347,25 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
     }
 
 
-    private void addMarkerAt(LatLng pos, Enquire.EnquireType type, String placeName,String enquireContent) {
+    private void addMarkerAt(LatLng pos, String placeName,String enquireContent) {
 
         float colour = 0f;
 
-        switch (type)
-        {
-            case Events:
-                colour = Constants.EVENTS_RED;
-                break;
-            case Facilities:
-                colour = Constants.FACILITIES_BROWN;
-                break;
-            case Food:
-                colour = Constants.FOOD_GREEN;
-                break;
-            case Accomodation:
-                colour = Constants.STAY_BLUE;
-                break;
-        }
+//        switch (type)
+//        {
+//            case Events:
+//                colour = Constants.EVENTS_RED;
+//                break;
+//            case Facilities:
+//                colour = Constants.FACILITIES_BROWN;
+//                break;
+//            case Food:
+//                colour = Constants.FOOD_GREEN;
+//                break;
+//            case Accomodation:
+//                colour = Constants.STAY_BLUE;
+//                break;
+//        }
         Marker marker = _map.addMarker(new MarkerOptions()
                 .position(pos)
                 .title(placeName)
