@@ -5,7 +5,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/creditsConstraintLayout"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="@color/lightBlueBackground">
 
     <TextView
         android:id="@+id/creditsTextView"
@@ -13,7 +14,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:text="@string/credits"
-        android:textSize="30sp"
+        android:textSize="50sp"
+        android:textColor="@color/darkBlueList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +28,9 @@
         android:layout_marginTop="32dp"
         android:text="@string/squad"
         android:textAlignment="viewStart"
-        android:textColor="@color/browser_actions_text_color"
+        android:textColor="@color/white"
         android:textSize="16sp"
+        android:background="@drawable/list_element"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creditsTextView" />
