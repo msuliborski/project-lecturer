@@ -10,7 +10,6 @@ public class User {
     private String userID;
     private String username;
     private String email;
-    //private HashMap<String, String>
 
     public User (final String userID, final String username, final String email) {
         this.userID = userID;

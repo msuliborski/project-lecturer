@@ -30,9 +30,7 @@ public class Lecturer implements Comparable<Lecturer> {
     private String firstName;
     private String lastName;
     private String title;
-    @Exclude
     private Map<String, Presence> presences;
-
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -44,11 +42,11 @@ public class Lecturer implements Comparable<Lecturer> {
         return result;
     }
 
-    //replace
     public String toString(Context context) {
         Resources resources = context.getResources();
         return  new StringBuilder().append(resources.getString(R.string.name)).append(firstName).append("\n")
                 .append(resources.getString(R.string.surname)).append(lastName).append("\n")
+                .append(resources.getString(R.string.title)).append(title).append("\n")
                 .toString();
     }
 }

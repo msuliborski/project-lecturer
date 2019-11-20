@@ -34,8 +34,19 @@ public class PresencesRecyclerViewAdapter extends RecyclerView.Adapter<Presences
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        TextView string = holder.itemView.findViewById(R.id.string);
-        string.setText(_presences.get(position).toString());
+        Presence presence = _presences.get(position);
+        TextView dayOfTheWeekTextView = holder.itemView.findViewById(R.id.dayOfTheWeekTextView);
+        TextView timeTextView = holder.itemView.findViewById(R.id.timeTextView);
+        TextView roomNumberTextView = holder.itemView.findViewById(R.id.roomNumberTextView);
+        TextView buildingNameTextView = holder.itemView.findViewById(R.id.buildingNameTextView);
+
+        dayOfTheWeekTextView.setText(presence.getDayOfTheWeek().toString());
+        timeTextView.setText(presence.getStartTime() + " - " + presence.getEndTime());
+        roomNumberTextView.setText(presence.getRoomNumber());
+        buildingNameTextView.setText(presence.getBuildingName());
+
+
+
     }
 
     // total number of rows
