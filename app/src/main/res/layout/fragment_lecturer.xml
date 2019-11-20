@@ -3,49 +3,84 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:background="@color/background">
+    android:layout_height="match_parent"
+    android:background="@color/backgroundLight"
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/avatarImageView"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/empty_avatar" />
-
-    <ImageButton
-        android:id="@+id/mapButton"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:background="@drawable/map"
-        app:layout_constraintBottom_toBottomOf="@id/avaliabilityTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/avaliabilityTextView"
-        app:layout_constraintTop_toTopOf="@+id/avaliabilityTextView" />
-
-    <TextView
-        android:id="@+id/lecturerNameTextView"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="mgr. inż. Jan Kowalski"
-        android:textSize="20dp"
-        app:layout_constraintBottom_toBottomOf="@+id/avatarImageView"
+        android:background="@drawable/card_background"
+        android:orientation="vertical"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/avatarImageView"
-        app:layout_constraintTop_toTopOf="@+id/avatarImageView" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/avaliabilityTextView"
+        <ImageView
+            android:id="@+id/lecturerAvatarImageView"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/empty_avatar" />
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@+id/lecturerAvatarImageView"
+            app:layout_constraintStart_toEndOf="@+id/lecturerAvatarImageView"
+            app:layout_constraintTop_toTopOf="@+id/lecturerAvatarImageView">
+
+            <TextView
+                android:id="@+id/lecturerTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="mgr. inż."
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/lecturerFirstNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Jan"
+                android:textSize="25sp" />
+
+            <TextView
+                android:id="@+id/lecturerLastNameTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Kowalski"
+                android:textSize="25sp" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ca.antonious.materialdaypicker.MaterialDayPicker
+        android:id="@+id/dayPicker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Now avaliable at: \n Building: B9 \n Room: 409"
-        android:textAlignment="textStart"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toStartOf="@+id/mapButton"
+        android:padding="8dp"
+        android:background="@drawable/card_background"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/avatarImageView" />
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/presencesRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:padding="8dp"
+        android:scrollbars="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dayPicker" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

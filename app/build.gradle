@@ -71,6 +71,9 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.10'
     compileOnly 'org.projectlombok:lombok:1.18.10'
     annotationProcessor 'org.projectlombok:lombok:1.18.10'
+
+
+    implementation 'ca.antonious:materialdaypicker:0.6.0'
 //
 //    annotationProcessor "org.projectlombok:lombok:1.16.16"
 //    implementation "org.projectlombok:lombok:1.16.16"

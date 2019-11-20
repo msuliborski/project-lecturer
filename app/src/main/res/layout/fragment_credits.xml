@@ -5,7 +5,7 @@
     android:id="@+id/creditsConstraintLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/background">
+    android:background="@color/backgroundLight">
 
     <TextView
         android:id="@+id/creditsTextView"
@@ -14,24 +14,57 @@
         android:layout_marginTop="32dp"
         android:text="@string/credits"
         android:textSize="50sp"
-        android:textColor="@color/darkBlueList"
+        android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
-        android:id="@+id/squadTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/squad"
-        android:textAlignment="viewStart"
-        android:textColor="@color/white"
+        android:id="@+id/squad1TextView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="24dp"
+        android:background="@drawable/card_background"
+        android:gravity="center"
+        android:text="@string/squad1"
+        android:textAlignment="center"
+        android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creditsTextView" />
+
+    <TextView
+        android:id="@+id/squad2TextView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/card_background"
+        android:gravity="center"
+        android:text="@string/squad2"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/squad1TextView" />
+
+    <TextView
+        android:id="@+id/squad3TextView"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/card_background"
+        android:gravity="center"
+        android:text="@string/squad3"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/squad2TextView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

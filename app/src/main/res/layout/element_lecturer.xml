@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:background="@color/background">
+    android:background="@drawable/card_background">
 
     <ImageView
         android:id="@+id/lecturerAvatarImageView"
@@ -14,20 +14,38 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/empty_avatar_white" />
+        app:srcCompat="@drawable/empty_avatar" />
 
-    <TextView
-        android:id="@+id/lecturerNameTextView"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:gravity="center"
-        android:textAlignment="center"
-        android:textColor="@color/white"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/starImageButton"
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="@+id/lecturerAvatarImageView"
         app:layout_constraintStart_toEndOf="@+id/lecturerAvatarImageView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/lecturerAvatarImageView">
+
+        <TextView
+            android:id="@+id/lecturerTitleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="mgr. inż."
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/lecturerFirstNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jan"
+            android:textSize="18sp"  />
+
+        <TextView
+            android:id="@+id/lecturerLastNameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Kowalski"
+            android:textSize="18sp" />
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/starImageButton"

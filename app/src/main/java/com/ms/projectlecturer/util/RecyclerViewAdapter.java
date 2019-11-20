@@ -32,8 +32,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String animal = _data.get(position);
-        holder._textView.setText(animal);
+//        String animal = _data.get(position);
+//        holder._textView.setText(animal);
     }
 
     // total number of rows
@@ -49,13 +49,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         ViewHolder(View itemView) {
             super(itemView);
-            _textView = itemView.findViewById(R.id.lecturerNameTextView);
-            itemView.setOnClickListener(this);
+//            _textView = itemView.findViewById(R.id.lecturerFirstNameTextView);
+//            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-            if (_clickListener != null) _clickListener.onItemClick(view, getAdapterPosition());
+//            if (_clickListener != null) _clickListener.onItemClick(view, getAdapterPosition());
         }
     }
 

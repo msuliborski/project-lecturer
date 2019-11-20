@@ -18,7 +18,9 @@
 
 <!--    Credits-->
     <string name="credits">Credits</string>
-    <string name="squad" translatable="false">- Michał Suliborski \n- Michał Kuśmidrowicz \n- Krzysztof Moszczyński</string>
+    <string name="squad1" translatable="false">Michał Suliborski</string>
+    <string name="squad2" translatable="false">Michał Kuśmidrowicz</string>
+    <string name="squad3" translatable="false">Krzysztof Moszczyński</string>
 
 <!--    Lecturer list-->
     <string name="searchHint">Search lecturer</string>
