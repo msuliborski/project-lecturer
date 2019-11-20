@@ -3,8 +3,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @AllArgsConstructor
-public enum FacultyType {
-    MECH("W Mech."), WEEIA("WEEIA"), CHEM("W Chem."), FTIMS("W FTIMS");
+public enum DayOfTheWeek {
+    Mon("Mon"), Thu("Thu");
     @Getter
     private String label;
 }
