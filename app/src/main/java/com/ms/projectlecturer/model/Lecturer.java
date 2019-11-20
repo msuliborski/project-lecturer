@@ -1,5 +1,6 @@
 package com.ms.projectlecturer.model;
 
+import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.time.LocalDateTime;
@@ -24,18 +25,20 @@ public class Lecturer implements Comparable<Lecturer> {
         return lastName.compareTo(o.lastName);
     }
 
-    private String lecturerID;
+    private String lecturerId;
     private String firstName;
     private String lastName;
     private String title;
-    private Map<String, Object> presences;
+    @Exclude
+    private Map<String, Presence> presences;
 
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("lecturerID", lecturerID);
+        result.put("lecturerID", lecturerId);
         result.put("firstName", firstName);
         result.put("lastName", lastName);
+        result.put("title", title);
         result.put("presences", presences);
         return result;
     }

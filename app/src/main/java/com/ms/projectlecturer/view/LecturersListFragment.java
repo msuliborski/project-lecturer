@@ -8,17 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
 
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -26,11 +22,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.ms.projectlecturer.R;
 import com.google.firebase.database.ValueEventListener;
 import com.ms.projectlecturer.model.Lecturer;
+import com.ms.projectlecturer.model.Presence;
 import com.ms.projectlecturer.util.RecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 public class LecturersListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener,
@@ -84,7 +83,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
         _lecturersActivity = (LecturersActivity) getActivity();
         _resources = getResources();
         _mapFragment = _lecturersActivity.getMapScreenFragment();
-        _recyclerView = view.findViewById(R.id.food_recycler_view);
+        _recyclerView = view.findViewById(R.id.lecturersRecyclerView);
         _recyclerView.setHasFixedSize(true);
         _layoutManager = new LinearLayoutManager(getActivity());
         _recyclerView.setLayoutManager(_layoutManager);
@@ -96,9 +95,15 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 _dataset = new ArrayList<>();
                 ArrayList<Lecturer> lecturers = new ArrayList<>();
-                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
-                    Lecturer l = childSnapshot.getValue(Lecturer.class);
-                    lecturers.add(l);
+                for (DataSnapshot lecturerDataSnapshot : dataSnapshot.getChildren()) {
+                    Map<String, Presence> presences = new HashMap<>();
+
+                    for (DataSnapshot presencesDataSnapshot : lecturerDataSnapshot.child("presences").getChildren()){
+                        presences.put(presencesDataSnapshot.getKey(), presencesDataSnapshot.getValue(Presence.class));
+                    }
+                    Lecturer lecturer = new Lecturer(lecturerDataSnapshot.getKey(), lecturerDataSnapshot.child("firstName").getValue().toString(),
+                            lecturerDataSnapshot.child("lastName").getValue().toString(), lecturerDataSnapshot.child("title").getValue().toString(), presences);
+                    lecturers.add(lecturer);
                 }
                 Collections.sort(lecturers);
                 Collections.reverse(lecturers);

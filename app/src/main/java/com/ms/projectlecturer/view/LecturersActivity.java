@@ -34,12 +34,17 @@ import com.bumptech.glide.request.RequestOptions;
 import com.ms.projectlecturer.R;
 import com.ms.projectlecturer.controller.ProgramClient;
 import com.google.firebase.auth.FirebaseAuth;
+import com.ms.projectlecturer.model.DayOfTheWeek;
+import com.ms.projectlecturer.model.Presence;
+import com.ms.projectlecturer.util.Spawner;
 
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 
 public class LecturersActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
-
 
     private static Context _context;
     private ImageView _profileImage;
@@ -172,7 +177,6 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
         _signout.setOnClickListener(this);
         _wikamp = sidebarView.findViewById(R.id.wikamp);
         _wikamp.setOnClickListener(this);
-        _wikamp.setText("kurwa");
         _settings = sidebarView.findViewById(R.id.sett);
         _settings.setOnClickListener(this);
         _credits = sidebarView.findViewById(R.id.creditsButton);
@@ -193,21 +197,27 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
         _currentFragment = _lecturersListFragment;
         _fragmentTransaction.commit();
 
-//        LecturerSpawner.spawnNewLecturer("Augusto", "Pinochet", FacultyType.FTIMS);
-////        LecturerSpawner.spawnNewLecturer("Murray", "Rothbard", FacultyType.WEEIA);
-////        LecturerSpawner.spawnNewLecturer("Milton", "Friedman", FacultyType.CHEM);
-////        LecturerSpawner.spawnNewLecturer("Janusz", "Korwin-Mikke", FacultyType.CHEM);
-////        LecturerSpawner.spawnNewLecturer("Ronald", "Reagan", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Margaret", "Thatcher", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Ozjasz", "Goldberg", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+
+        // LODEX (B9)           51.747230, 19.453853
+        // CTI (B7)             51.747002, 19.455931
+        // Ins. Fizyki (B14)    51.746546, 19.455403
+
+
+//        Map<String, Presence> ABPresences = new HashMap<>();
+//        ABPresences.put("0", new Presence(DayOfTheWeek.Mon, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        ABPresences.put("1", new Presence(DayOfTheWeek.Tue, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        ABPresences.put("2", new Presence(DayOfTheWeek.Wed, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        ABPresences.put("3", new Presence(DayOfTheWeek.Thu, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        ABPresences.put("4", new Presence(DayOfTheWeek.Fri, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        Spawner.spawnNewLecturer("Aaaaa", "Bbbbbb", "dr. inż.", ABPresences);
+//
+//        Map<String, Presence> CDPresences = new HashMap<>();
+//        CDPresences.put("0", new Presence(DayOfTheWeek.Mon, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        CDPresences.put("1", new Presence(DayOfTheWeek.Tue, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        CDPresences.put("2", new Presence(DayOfTheWeek.Wed, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        CDPresences.put("3", new Presence(DayOfTheWeek.Thu, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        CDPresences.put("4", new Presence(DayOfTheWeek.Fri, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        Spawner.spawnNewLecturer("Cccccc", "Dddddd", "dr. inż.", CDPresences);
 
     }
 
@@ -222,7 +232,6 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
         if (view == _food) {
             view.startAnimation(_buttonClick);
             fragment = _mapFragmentFragment;
-            Log.d("tag", "onComplete: kurwa3");
         } else if (view == _profile) {
             view.startAnimation(_buttonClick);
         } else if (view == _credits) {

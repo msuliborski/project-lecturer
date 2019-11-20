@@ -4,7 +4,13 @@ import lombok.Getter;
 
 @AllArgsConstructor
 public enum DayOfTheWeek {
-    Mon("Mon"), Thu("Thu");
+    Mon("Mon"),
+    Tue("Tue"),
+    Wed("Wed"),
+    Thu("Thu"),
+    Fri("Fri"),
+    Sat("Sat"),
+    Sun("Sun");
     @Getter
     private String label;
 }
