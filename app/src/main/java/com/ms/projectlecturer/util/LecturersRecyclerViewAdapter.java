@@ -4,21 +4,26 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+import android.content.Context;
 
 import com.ms.projectlecturer.R;
+import com.ms.projectlecturer.model.Lecturer;
 
 import java.util.List;
 
 public class LecturersRecyclerViewAdapter extends RecyclerView.Adapter<LecturersRecyclerViewAdapter.ViewHolder> {
 
-    private List<String> _data;
+    private List<Lecturer> _lecturers;
     private LayoutInflater _inflater;
     private ItemClickListener _clickListener;
+    private Context _context;
 
     // data is passed into the constructor
-    public LecturersRecyclerViewAdapter(LayoutInflater inflater, List<String> data) {
-        _data = data;
+    public LecturersRecyclerViewAdapter(LayoutInflater inflater, List<Lecturer> lecturers, Context context) {
+        _lecturers = lecturers;
         _inflater = inflater;
+        _context = context;
     }
 
     // inflates the row layout from xml when needed
@@ -31,12 +36,14 @@ public class LecturersRecyclerViewAdapter extends RecyclerView.Adapter<Lecturers
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        //TextView string = holder.itemView.findViewById(R.id.string);
+        //string.setText(_presences.get(position).toString(_context));
     }
 
     // total number of rows
     @Override
     public int getItemCount() {
-        return _data.size();
+        return _lecturers.size();
     }
 
 
@@ -54,8 +61,8 @@ public class LecturersRecyclerViewAdapter extends RecyclerView.Adapter<Lecturers
     }
 
     // convenience method for getting data at click position
-    String getItem(int id) {
-        return _data.get(id);
+    Lecturer getItem(int id) {
+        return _lecturers.get(id);
     }
 
     // allows clicks events to be caught
