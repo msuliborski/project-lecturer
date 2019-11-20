@@ -67,9 +67,12 @@ public class LecturerFragment extends Fragment implements PresencesRecyclerViewA
     @Override
     public void onItemClick(View view, int position) {
         Presence presence = presences.get(position);
-        mapFragment.addMarkerAt(new LatLng(presence.getLat(), presence.getLat()), presence.getBuildingName(),
+        LatLng latLng = new LatLng(presence.getLat(), presence.getLng());
+        mapFragment.addMarkerAt(latLng, presence.getBuildingName(),
                 presence.getDayOfTheWeek() + " " + presence.getStartTime() + "-" +
                         presence.getEndTime());
+        mapFragment.setLockedOnPlace(true);
+        mapFragment.moveCamera(latLng, 15f);
         lecturersActivity.setCurrentFragment(mapFragment);
     }
 
@@ -88,12 +91,12 @@ public class LecturerFragment extends Fragment implements PresencesRecyclerViewA
         currentListener = lecturerReference.child("presences").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                presences = new ArrayList<>();
+               presences = new ArrayList<>();
                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                      Presence presence = childSnapshot.getValue(Presence.class);
                      presences.add(presence);
                }
-                adapter = new PresencesRecyclerViewAdapter(inflater, presences);
+                adapter = new PresencesRecyclerViewAdapter(inflater, presences, getContext());
                 recyclerView.setAdapter(adapter);
                 adapter.setClickListener(lecturerFragment);
             }
