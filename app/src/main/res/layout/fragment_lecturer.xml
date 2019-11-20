@@ -3,10 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/quantum_lightblue">
-
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <ImageView
         android:id="@+id/avatarImageView"
@@ -15,6 +13,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/empty_avatar" />
+
+    <ImageButton
+        android:id="@+id/mapButton"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:background="@drawable/map"
+        app:layout_constraintBottom_toBottomOf="@id/avaliabilityTextView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/avaliabilityTextView"
+        app:layout_constraintTop_toTopOf="@+id/avaliabilityTextView" />
 
     <TextView
         android:id="@+id/lecturerNameTextView"
@@ -25,30 +33,18 @@
         app:layout_constraintBottom_toBottomOf="@+id/avatarImageView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/avatarImageView"
-        app:layout_constraintTop_toTopOf="@+id/avatarImageView"
-        app:layout_constraintVertical_bias="0.495" />
+        app:layout_constraintTop_toTopOf="@+id/avatarImageView" />
 
     <TextView
         android:id="@+id/avaliabilityTextView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
         android:text="Now avaliable at: \n Building: B9 \n Room: 409"
         android:textAlignment="textStart"
         android:textSize="20dp"
         app:layout_constraintEnd_toStartOf="@+id/mapButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/avatarImageView" />
-
-    <Button
-        android:id="@+id/mapButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Mapa"
-        app:layout_constraintBottom_toBottomOf="@id/avaliabilityTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/avaliabilityTextView"
-        app:layout_constraintTop_toTopOf="@+id/avaliabilityTextView" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
