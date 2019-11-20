@@ -61,7 +61,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
     private LatLng _yourPos;
     private FragmentManager _fragmentManager;
     private FragmentTransaction _fragmentTransaction;
-    private List<Marker> _markers;
+    private Marker _marker;
     private PlacesClient _placesClient;
     private Place _place;
     private int _invokeCounter = 0;
@@ -347,9 +347,9 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
     }
 
 
-    private void addMarkerAt(LatLng pos, String placeName,String enquireContent) {
+    public void addMarkerAt(LatLng pos, String title, String text) {
 
-        float colour = 0f;
+        float colour = Constants.EVENTS_RED;
 
 //        switch (type)
 //        {
@@ -366,19 +366,17 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
 //                colour = Constants.STAY_BLUE;
 //                break;
 //        }
-        Marker marker = _map.addMarker(new MarkerOptions()
+        _marker.remove();
+        _marker = _map.addMarker(new MarkerOptions()
                 .position(pos)
-                .title(placeName)
-                .snippet(enquireContent)
+                .title(title)
+                .snippet(text)
                 .icon(BitmapDescriptorFactory.defaultMarker(colour)));
-        _markers.add(marker);
     }
 
 
-    public void setMarkersVisible(boolean isVisible) {
-        for (Marker marker : _markers) {
-            marker.setVisible(isVisible);
-        }
+    public void setMarkerVisible(boolean isVisible) {
+        _marker.setVisible(false);
     }
 
     @Override
