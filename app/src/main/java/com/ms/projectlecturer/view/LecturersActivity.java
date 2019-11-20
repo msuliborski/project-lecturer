@@ -22,7 +22,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import lombok.Getter;
 
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
@@ -38,7 +37,6 @@ import com.ms.projectlecturer.model.DayOfTheWeek;
 import com.ms.projectlecturer.model.Presence;
 import com.ms.projectlecturer.util.Spawner;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -60,7 +58,6 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
     private ActionBarDrawerToggle _toggle;
     private DrawerLayout _drawerLayout;
 
-    private ProgramClient _programClient = ProgramClient.getInstance();
     private FirebaseAuth _auth = FirebaseAuth.getInstance();
     @Getter
     private LecturersListFragment _lecturersListFragment = new LecturersListFragment();
@@ -96,21 +93,15 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
     public Fragment getCurrentFragment() {
         return _currentFragment;
     }
-
     public Fragment getSettinsFragment() {
         return _settingsFragmentFragment;
     }
-
     public Fragment getLecturersFragment() {
         return _lecturersListFragment;
     }
-
-
     public Fragment getLecturerFragment() {
         return _lecturerFragment;
     }
-
-
     public Fragment getCreditsScreenFragment() {
         return _creditsFragmentFragment;
     }
@@ -129,21 +120,12 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
     }
 
 
-    public static Context getContext() {
-        return _context;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         _context = this;
 
         View sidebarView = getLayoutInflater().inflate(R.layout.fragment_sidebar, null);
-//        TextView text = (TextView) inflatedView.findViewById(R.id.text_view);
-//        text.setText("Hello!");
-
-
-
 
         _pref = getApplicationContext().getSharedPreferences("MyPref", MODE_PRIVATE);
         _resources = getResources();
@@ -162,7 +144,6 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
         _drawerLayout.addDrawerListener(_toggle);
         _toggle.syncState();
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
 
         _profileImage = sidebarView.findViewById(R.id.profile);
 
@@ -197,31 +178,26 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
         _currentFragment = _lecturersListFragment;
         _fragmentTransaction.commit();
 
-
         // LODEX (B9)           51.747230, 19.453853
         // CTI (B7)             51.747002, 19.455931
         // Ins. Fizyki (B14)    51.746546, 19.455403
 
-
 //        Map<String, Presence> ABPresences = new HashMap<>();
-//        ABPresences.put("0", new Presence(DayOfTheWeek.Mon, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-//        ABPresences.put("1", new Presence(DayOfTheWeek.Tue, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-//        ABPresences.put("2", new Presence(DayOfTheWeek.Wed, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-//        ABPresences.put("3", new Presence(DayOfTheWeek.Thu, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-//        ABPresences.put("4", new Presence(DayOfTheWeek.Fri, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        ABPresences.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        ABPresences.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        ABPresences.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        ABPresences.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+//        ABPresences.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
 //        Spawner.spawnNewLecturer("Aaaaa", "Bbbbbb", "dr. inż.", ABPresences);
 //
 //        Map<String, Presence> CDPresences = new HashMap<>();
-//        CDPresences.put("0", new Presence(DayOfTheWeek.Mon, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-//        CDPresences.put("1", new Presence(DayOfTheWeek.Tue, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-//        CDPresences.put("2", new Presence(DayOfTheWeek.Wed, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-//        CDPresences.put("3", new Presence(DayOfTheWeek.Thu, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-//        CDPresences.put("4", new Presence(DayOfTheWeek.Fri, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        CDPresences.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        CDPresences.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        CDPresences.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        CDPresences.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
+//        CDPresences.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
 //        Spawner.spawnNewLecturer("Cccccc", "Dddddd", "dr. inż.", CDPresences);
-
     }
-
-
 
     @Override
     public void onClick(View view) {
