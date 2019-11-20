@@ -9,8 +9,8 @@
 
 <!--    Services-->
     <string name="google_map_api_key" translatable="false">AIzaSyBcJUj6duPmHPuCmag-veFK1bytff8h5yc</string>
-    <string name="facebook_app_id" translatable="false">2341358939256022</string>
-    <string name="fb_login_protocol_scheme" translatable="false">fb2341358939256022</string>
+    <string name="facebook_app_id" translatable="false">2554417024883759</string>
+    <string name="fb_login_protocol_scheme" translatable="false">fb2554417024883759</string>
 
 <!--    Settings-->
     <string name="settings">Settings</string>
