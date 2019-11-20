@@ -4,7 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
+import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.ms.projectlecturer.R;
@@ -17,11 +17,13 @@ public class PresencesRecyclerViewAdapter extends RecyclerView.Adapter<Presences
     private List<Presence> _presences;
     private LayoutInflater _inflater;
     private ItemClickListener _clickListener;
+    private Context _context;
 
     // data is passed into the constructor
-    public PresencesRecyclerViewAdapter(LayoutInflater inflater, List<Presence> presences) {
+    public PresencesRecyclerViewAdapter(LayoutInflater inflater, List<Presence> presences, Context context) {
         _presences = presences;
         _inflater = inflater;
+        _context = context;
     }
 
     // inflates the row layout from xml when needed
@@ -44,9 +46,6 @@ public class PresencesRecyclerViewAdapter extends RecyclerView.Adapter<Presences
         timeTextView.setText(presence.getStartTime() + " - " + presence.getEndTime());
         roomNumberTextView.setText(presence.getRoomNumber());
         buildingNameTextView.setText(presence.getBuildingName());
-
-
-
     }
 
     // total number of rows
