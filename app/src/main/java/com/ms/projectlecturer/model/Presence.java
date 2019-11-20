@@ -1,8 +1,10 @@
 package com.ms.projectlecturer.model;
 
-import com.google.firebase.database.IgnoreExtraProperties;
+import android.content.res.Resources;
 
-import java.util.Date;
+import com.google.firebase.database.IgnoreExtraProperties;
+import com.ms.projectlecturer.R;
+import android.content.Context;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -33,5 +35,12 @@ public class Presence {
         result.put("lat", lat);
         result.put("lng", lng);
         return result;
+    }
+
+    public String toString(Context context) {
+        Resources resources = context.getResources();
+        return new StringBuilder().append(startTime).append("-").append(endTime).append("\n")
+                .append(resources.getString(R.string.building)).append(": ").append(buildingName)
+                .append(resources.getString(R.string.room)).append(": ").append(roomNumber).toString();
     }
 }

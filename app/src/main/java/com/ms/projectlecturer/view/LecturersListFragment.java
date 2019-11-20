@@ -40,6 +40,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     private RecyclerView.LayoutManager _layoutManager;
     private MapFragment _mapFragment;
     private LecturersActivity _lecturersActivity;
+    private LecturerFragment _lecturerFragment;
     private LayoutInflater _inflater;
     private Button _allButton;
     private Button _topButton;
@@ -49,6 +50,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     private ValueEventListener _currentListener;
     private Resources _resources;
     private DatabaseReference _lecturersReference = FirebaseDatabase.getInstance().getReference("Lecturers");
+    private List<Lecturer> _lecturers;
     private LecturersListFragment _lecturersListFragment = this;
 
     @Override
@@ -63,17 +65,16 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onItemClick(View view, int position) {
-
+        _lecturerFragment.setLecturer(_lecturers.get(position));
+        _lecturersActivity.setCurrentFragment(_lecturerFragment);
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         _inflater = inflater;
-
-                return inflater.inflate(R.layout.fragment_lecturers_list, container, false);
+        return inflater.inflate(R.layout.fragment_lecturers_list, container, false);
     }
 
     @Override
@@ -81,6 +82,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
         super.onViewCreated(view, savedInstanceState);
 
         _lecturersActivity = (LecturersActivity) getActivity();
+        _lecturerFragment = (LecturerFragment) _lecturersActivity.getLecturerFragment();
         _resources = getResources();
         _mapFragment = _lecturersActivity.getMapScreenFragment();
         _recyclerView = view.findViewById(R.id.lecturersRecyclerView);
@@ -94,21 +96,20 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 _dataset = new ArrayList<>();
-                ArrayList<Lecturer> lecturers = new ArrayList<>();
+                _lecturers = new ArrayList<>();
                 for (DataSnapshot lecturerDataSnapshot : dataSnapshot.getChildren()) {
                     Map<String, Presence> presences = new HashMap<>();
-
                     for (DataSnapshot presencesDataSnapshot : lecturerDataSnapshot.child("presences").getChildren()){
                         presences.put(presencesDataSnapshot.getKey(), presencesDataSnapshot.getValue(Presence.class));
                     }
                     Lecturer lecturer = new Lecturer(lecturerDataSnapshot.getKey(), lecturerDataSnapshot.child("firstName").getValue().toString(),
                             lecturerDataSnapshot.child("lastName").getValue().toString(), lecturerDataSnapshot.child("title").getValue().toString(), presences);
-                    lecturers.add(lecturer);
+                    _lecturers.add(lecturer);
                 }
-                Collections.sort(lecturers);
-                Collections.reverse(lecturers);
-                for (Lecturer l : lecturers) {
-                    _dataset.add(l.toString());
+                Collections.sort(_lecturers);
+                Collections.reverse(_lecturers);
+                for (Lecturer l : _lecturers) {
+                    _dataset.add(l.toString(getContext()));
                 }
                 _adapter = new RecyclerViewAdapter(_inflater, _dataset);
                 _recyclerView.setAdapter(_adapter);
@@ -117,7 +118,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
-
+                databaseError.toException().printStackTrace();
             }
         });
     }
