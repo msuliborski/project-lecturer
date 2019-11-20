@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="150pt"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_centerHorizontal="true"
     android:layout_centerVertical="true"
-    android:background="@drawable/list_element">
+    android:background="@color/background">
 
     <ImageView
         android:id="@+id/lecturerAvatarImageView"
@@ -23,8 +22,8 @@
         android:layout_height="100dp"
         android:gravity="center"
         android:textAlignment="center"
-        android:textSize="15sp"
         android:textColor="@color/white"
+        android:textSize="15sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/starImageButton"
         app:layout_constraintStart_toEndOf="@+id/lecturerAvatarImageView"
