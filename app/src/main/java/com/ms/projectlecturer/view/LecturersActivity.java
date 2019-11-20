@@ -194,20 +194,20 @@ public class LecturersActivity extends AppCompatActivity implements View.OnClick
         _fragmentTransaction.commit();
 
 //        LecturerSpawner.spawnNewLecturer("Augusto", "Pinochet", FacultyType.FTIMS);
-//        LecturerSpawner.spawnNewLecturer("Murray", "Rothbard", FacultyType.WEEIA);
-//        LecturerSpawner.spawnNewLecturer("Milton", "Friedman", FacultyType.CHEM);
-//        LecturerSpawner.spawnNewLecturer("Janusz", "Korwin-Mikke", FacultyType.CHEM);
-//        LecturerSpawner.spawnNewLecturer("Ronald", "Reagan", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Margaret", "Thatcher", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Ozjasz", "Goldberg", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
-//        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Murray", "Rothbard", FacultyType.WEEIA);
+////        LecturerSpawner.spawnNewLecturer("Milton", "Friedman", FacultyType.CHEM);
+////        LecturerSpawner.spawnNewLecturer("Janusz", "Korwin-Mikke", FacultyType.CHEM);
+////        LecturerSpawner.spawnNewLecturer("Ronald", "Reagan", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Margaret", "Thatcher", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Ozjasz", "Goldberg", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
+////        LecturerSpawner.spawnNewLecturer("Test", "Test", FacultyType.MECH);
 
     }
 
