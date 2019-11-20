@@ -366,7 +366,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
 //                colour = Constants.STAY_BLUE;
 //                break;
 //        }
-        _marker.remove();
+        if (_marker != null) _marker.remove();
+
         _marker = _map.addMarker(new MarkerOptions()
                 .position(pos)
                 .title(title)

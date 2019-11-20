@@ -21,20 +21,19 @@ import com.google.firebase.database.ValueEventListener;
 import com.ms.projectlecturer.R;
 import com.ms.projectlecturer.model.Lecturer;
 import com.ms.projectlecturer.model.Presence;
-import com.ms.projectlecturer.util.RecyclerViewAdapter;
+import com.ms.projectlecturer.util.LecturersRecyclerViewAdapter;
+import com.ms.projectlecturer.util.PresencesRecyclerViewAdapter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class LecturerFragment extends Fragment implements RecyclerViewAdapter.ItemClickListener,
+public class LecturerFragment extends Fragment implements PresencesRecyclerViewAdapter.ItemClickListener,
         View.OnClickListener {
 
 
     //private String lecturerId;
     private RecyclerView recyclerView;
-    private RecyclerViewAdapter adapter;
-    private List<String> dataset;
+    private PresencesRecyclerViewAdapter adapter;
     private List<Presence> presences;
     private ValueEventListener currentListener;
     private DatabaseReference lecturerReference;
@@ -81,7 +80,7 @@ public class LecturerFragment extends Fragment implements RecyclerViewAdapter.It
 
 
     public void setLecturer(Lecturer lecturer) {
-        this.lecturerStats.setText(lecturer.toString(getContext()));
+//        this.lecturerStats.setText(lecturer.toString(getContext()));
         if (currentListener != null) {
             lecturerReference.removeEventListener(currentListener);
         }
@@ -89,14 +88,12 @@ public class LecturerFragment extends Fragment implements RecyclerViewAdapter.It
         currentListener = lecturerReference.child("presences").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                dataset = new ArrayList<>();
                 presences = new ArrayList<>();
                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
                      Presence presence = childSnapshot.getValue(Presence.class);
-                     dataset.add(presence.toString(getContext()));
                      presences.add(presence);
                }
-                adapter = new RecyclerViewAdapter(inflater, dataset);
+                adapter = new PresencesRecyclerViewAdapter(inflater, presences);
                 recyclerView.setAdapter(adapter);
                 adapter.setClickListener(lecturerFragment);
             }

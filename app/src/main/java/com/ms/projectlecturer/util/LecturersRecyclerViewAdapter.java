@@ -4,20 +4,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import com.ms.projectlecturer.R;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class LecturersRecyclerViewAdapter extends RecyclerView.Adapter<LecturersRecyclerViewAdapter.ViewHolder> {
 
     private List<String> _data;
     private LayoutInflater _inflater;
     private ItemClickListener _clickListener;
 
     // data is passed into the constructor
-    public RecyclerViewAdapter(LayoutInflater inflater, List<String> data) {
+    public LecturersRecyclerViewAdapter(LayoutInflater inflater, List<String> data) {
         _data = data;
         _inflater = inflater;
     }

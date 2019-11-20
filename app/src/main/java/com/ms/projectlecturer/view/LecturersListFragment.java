@@ -23,7 +23,7 @@ import com.ms.projectlecturer.R;
 import com.google.firebase.database.ValueEventListener;
 import com.ms.projectlecturer.model.Lecturer;
 import com.ms.projectlecturer.model.Presence;
-import com.ms.projectlecturer.util.RecyclerViewAdapter;
+import com.ms.projectlecturer.util.LecturersRecyclerViewAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -33,10 +33,10 @@ import java.util.Map;
 
 
 public class LecturersListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener,
-        RecyclerViewAdapter.ItemClickListener {
+        LecturersRecyclerViewAdapter.ItemClickListener {
 
     private RecyclerView _recyclerView;
-    private RecyclerViewAdapter _adapter;
+    private LecturersRecyclerViewAdapter _adapter;
     private RecyclerView.LayoutManager _layoutManager;
     private MapFragment _mapFragment;
     private LecturersActivity _lecturersActivity;
@@ -111,7 +111,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
                 for (Lecturer l : _lecturers) {
                     _dataset.add(l.toString(getContext()));
                 }
-                _adapter = new RecyclerViewAdapter(_inflater, _dataset);
+                _adapter = new LecturersRecyclerViewAdapter(_inflater, _dataset);
                 _recyclerView.setAdapter(_adapter);
                 _adapter.setClickListener(_lecturersListFragment);
             }
