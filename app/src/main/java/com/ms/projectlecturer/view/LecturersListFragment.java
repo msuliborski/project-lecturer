@@ -46,7 +46,6 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     private Button _topButton;
     private Button _addEnquireButton;
     private AlphaAnimation _buttonClick = new AlphaAnimation(1f, 0.8f);
-    private List<String> _dataset;
     private ValueEventListener _currentListener;
     private Resources _resources;
     private DatabaseReference _lecturersReference = FirebaseDatabase.getInstance().getReference("Lecturers");
@@ -95,7 +94,6 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
         _lecturersReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                _dataset = new ArrayList<>();
                 _lecturers = new ArrayList<>();
                 for (DataSnapshot lecturerDataSnapshot : dataSnapshot.getChildren()) {
                     Map<String, Presence> presences = new HashMap<>();
@@ -108,10 +106,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
                 }
                 Collections.sort(_lecturers);
                 Collections.reverse(_lecturers);
-                for (Lecturer l : _lecturers) {
-                    _dataset.add(l.toString(getContext()));
-                }
-                _adapter = new LecturersRecyclerViewAdapter(_inflater, _dataset);
+                _adapter = new LecturersRecyclerViewAdapter(_inflater, _lecturers, getContext());
                 _recyclerView.setAdapter(_adapter);
                 _adapter.setClickListener(_lecturersListFragment);
             }
