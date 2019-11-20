@@ -2,9 +2,10 @@ package com.ms.projectlecturer.model;
 
 import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
+import com.ms.projectlecturer.R;
+import android.content.Context;
+import android.content.res.Resources;
 
-import java.time.LocalDateTime;
-import java.time.Period;
 import java.util.HashMap;
 import java.util.Map;
 import lombok.AllArgsConstructor;
@@ -44,10 +45,10 @@ public class Lecturer implements Comparable<Lecturer> {
     }
 
     //replace
-    @Override
-    public String toString() {
-        return  new StringBuilder().append("Name: ").append(firstName).append("\n")
-                .append("Surname: ").append(lastName).append("\n")
+    public String toString(Context context) {
+        Resources resources = context.getResources();
+        return  new StringBuilder().append(resources.getString(R.string.name)).append(firstName).append("\n")
+                .append(resources.getString(R.string.surname)).append(lastName).append("\n")
                 .toString();
     }
 }

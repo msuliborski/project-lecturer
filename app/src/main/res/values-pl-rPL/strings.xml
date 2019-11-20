@@ -14,6 +14,12 @@
 
     <!--    Lecturer list-->
     <string name="searchHint">Wyszukaj wykładowcę</string>
+    <string name="name">Imię</string>
+    <string name="surname">Nazwisko</string>
+
+    <!--    Lecturer-->
+    <string name="building">Budynek</string>
+    <string name="room">Pokój</string>
 
     <!--    Side bar-->
     <string name="profileButton">Profil</string>

@@ -24,6 +24,12 @@
 
 <!--    Lecturer list-->
     <string name="searchHint">Search lecturer</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+
+<!--    Lecturer-->
+    <string name="building">Building</string>
+    <string name="room">Room</string>
 
 <!--    Side bar-->
     <string name="profileButton">Profile</string>
