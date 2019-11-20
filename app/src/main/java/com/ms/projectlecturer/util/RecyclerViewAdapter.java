@@ -32,8 +32,6 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//        String animal = _data.get(position);
-//        holder._textView.setText(animal);
     }
 
     // total number of rows
@@ -45,17 +43,14 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     // stores and recycles views as they are scrolled off screen
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView _textView;
-
         ViewHolder(View itemView) {
             super(itemView);
-//            _textView = itemView.findViewById(R.id.lecturerFirstNameTextView);
-//            itemView.setOnClickListener(this);
+            itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
-//            if (_clickListener != null) _clickListener.onItemClick(view, getAdapterPosition());
+            if (_clickListener != null) _clickListener.onItemClick(view, getAdapterPosition());
         }
     }
 

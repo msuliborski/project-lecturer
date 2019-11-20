@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:background="@color/backgroundLight">
+    android:background="@color/backgroundDark">
 
     <Space
         android:layout_width="match_parent"

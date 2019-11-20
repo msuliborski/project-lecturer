@@ -5,7 +5,7 @@
     android:id="@+id/creditsConstraintLayout"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/backgroundLight">
+    android:background="@color/backgroundDark">
 
     <TextView
         android:id="@+id/creditsTextView"
