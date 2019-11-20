@@ -16,6 +16,7 @@
     <string name="searchHint">Wyszukaj wykładowcę</string>
     <string name="name">Imię</string>
     <string name="surname">Nazwisko</string>
+    <string name="title">Tytuł</string>
 
     <!--    Lecturer-->
     <string name="building">Budynek</string>

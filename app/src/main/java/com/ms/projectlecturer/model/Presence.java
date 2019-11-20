@@ -39,7 +39,7 @@ public class Presence {
 
     public String toString(Context context) {
         Resources resources = context.getResources();
-        return new StringBuilder().append(startTime).append("-").append(endTime).append("\n")
+        return new StringBuilder().append(startTime).append(" - ").append(endTime).append("\n")
                 .append(resources.getString(R.string.building)).append(": ").append(buildingName)
                 .append(resources.getString(R.string.room)).append(": ").append(roomNumber).toString();
     }

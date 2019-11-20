@@ -21,7 +21,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.ms.projectlecturer.R;
 import com.ms.projectlecturer.model.Lecturer;
 import com.ms.projectlecturer.model.Presence;
-import com.ms.projectlecturer.util.LecturersRecyclerViewAdapter;
 import com.ms.projectlecturer.util.PresencesRecyclerViewAdapter;
 
 import java.util.ArrayList;
@@ -30,14 +29,11 @@ import java.util.List;
 public class LecturerFragment extends Fragment implements PresencesRecyclerViewAdapter.ItemClickListener,
         View.OnClickListener {
 
-
-    //private String lecturerId;
     private RecyclerView recyclerView;
     private PresencesRecyclerViewAdapter adapter;
     private List<Presence> presences;
     private ValueEventListener currentListener;
     private DatabaseReference lecturerReference;
-    private TextView lecturerStats;
     private LecturerFragment lecturerFragment;
     private LayoutInflater inflater;
     private MapFragment mapFragment;
@@ -78,9 +74,7 @@ public class LecturerFragment extends Fragment implements PresencesRecyclerViewA
 
     }
 
-
     public void setLecturer(Lecturer lecturer) {
-//        this.lecturerStats.setText(lecturer.toString(getContext()));
         if (currentListener != null) {
             lecturerReference.removeEventListener(currentListener);
         }
