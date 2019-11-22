@@ -10,24 +10,27 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Presence {
-    private String dayOfTheWeek;
+public class Event {
+    private String id;
+    private String weekDay;
     private String startTime;
     private String endTime;
     private String roomNumber;
     private String buildingName;
-    private String eventType;
+    private String type;
+    private String name;
     private Double lat;
     private Double lng;
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
-        result.put("dayOfTheWeek", dayOfTheWeek);
+        result.put("dayOfTheWeek", weekDay);
         result.put("startTime", startTime);
         result.put("endTime", endTime);
         result.put("roomNumber", roomNumber);
         result.put("buildingName", buildingName);
-        result.put("eventType", eventType);
+        result.put("eventType", type);
+        result.put("eventName", name);
         result.put("lat", lat);
         result.put("lng", lng);
         return result;
@@ -35,12 +38,14 @@ public class Presence {
 
     @Override
     public String toString() {
-        return "Presence{" +
-                "dayOfTheWeek='" + dayOfTheWeek + '\'' +
+        return "\nEvent{" +
+                "id='" + id + '\'' +
+                ", weekDay='" + weekDay + '\'' +
                 ", startTime='" + startTime + '\'' +
                 ", endTime='" + endTime + '\'' +
                 ", roomNumber='" + roomNumber + '\'' +
-                ", buildingName='" + buildingName + '\'' +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

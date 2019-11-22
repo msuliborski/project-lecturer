@@ -9,142 +9,88 @@ import java.util.List;
 
 public class Parser {
 
-    public enum Kind {
-        skip("skip"),
-        lecturer("lecturer"),
-        event("event");
-        Kind(String s) {
-        }
+    public enum Mode {
+        skip, lecturer, event
     }
 
     List<Lecturer> lecturers = new ArrayList<>();
 
-    public void doThisShit(){
 
-
+    void doThisShit(){
         try {
-            BufferedReader csvReader1 = new BufferedReader(new FileReader("src/main/resources/timetable-good.csv"));
-            String row;
-            List<String> eventRows = new ArrayList<>();
-            Kind kind = Kind.skip;
-            newLine: while ((row = csvReader1.readLine()) != null) {
-                if (row.split(";").length == 0) {
-                    if (eventRows.isEmpty())
-                        continue newLine;
-                } else {
-                    if (row.split(";")[0].equals("CT_STAFF")) {
-                        kind = Kind.lecturer; continue newLine;
-                    } else if (row.split(";")[0].equals("CT_MODULE")) {
-                        kind = Kind.skip; continue newLine;
-                    } else if (row.split(";")[0].equals("CT_ROOM")) {
-                        kind = Kind.skip; continue newLine;
-                    } else if (row.split(";")[0].equals("CT_EVENT_CAT")) {
-                        kind = Kind.skip;  continue newLine;
-                    } else if (row.split(";")[0].equals("CT_FACULTY")) {
-                        kind = Kind.skip; continue newLine;
-                    } else if (row.split(";")[0].equals("CT_SPAN")) {
-                        kind = Kind.skip; continue newLine;
-                    } else if (row.split(";")[0].equals("CT_EVENT")) {
-                        kind = Kind.event; continue newLine;
+            BufferedReader bufferedReader = new BufferedReader(new FileReader("src/main/resources/timetable-good.csv"));
+            String timetableRow;
+            Event latestEvent = new Event();
+            Mode mode = Mode.skip;
+            while ((timetableRow = bufferedReader.readLine()) != null) {
+                if (timetableRow.split(";").length == 0) continue; //row is completely empty
+                else {
+                    String firstCell = timetableRow.split(";")[0];
+                    if (firstCell.equals("CT_STAFF")) {
+                        mode = Mode.lecturer; continue;
+                    } else if (firstCell.equals("CT_EVENT")) {
+                        mode = Mode.event; continue;
+                    } else if (firstCell.contains("CT_")) {
+                        mode = Mode.skip; continue;
                     }
                 }
-                switch (kind){
-                    case lecturer:{
-                        String id = "", firstName = "", lastName = "", title = "";
-                        String[] lecturerRow = row.split(";");
-                        id = lecturerRow[0];
-                        if (id.equals("_staff_id")) continue newLine;
-                        firstName = getFirstNameFromFuckedUpName(lecturerRow[2]);
-                        lastName = getLastNameFromFuckedUpName(lecturerRow[2]);
-                        title = getFixedFuckedUpTitle(getTitleFromFuckedUpName(lecturerRow[2]).equals("") ? lecturerRow[3] : getTitleFromFuckedUpName(lecturerRow[2]));
+                if (mode == Mode.lecturer) {
+                    String id = "", firstName = "", lastName = "", title = "";
+                    String[] lecturerRow = timetableRow.split(";");
+                    id = lecturerRow[1];
+                    if (id.equals("_staff_id")) continue;
+                    firstName = getFirstNameFromFuckedUpName(lecturerRow[2]);
+                    lastName = getLastNameFromFuckedUpName(lecturerRow[2]);
+                    title = getFixedFuckedUpTitle(getTitleFromFuckedUpName(lecturerRow[2]).equals("") ? lecturerRow[3] : getTitleFromFuckedUpName(lecturerRow[2]));
 
-                        //System.out.println(id + " -- " + firstName + " -- " + lastName + " -- " + title);
-                        lecturers.add(new Lecturer(id, firstName, lastName, title, new HashMap<>()));
-                        continue newLine;
+                    System.out.println(id + " -- " + firstName + " -- " + lastName + " -- " + title);
+                    lecturers.add(new Lecturer(id, firstName, lastName, title, new HashMap<>()));
 
-                    } case event: {
-                        if (row.split(";").length == 0 || !row.split(";")[0].equals("")){ //mamy koniec tabeli lub start nowego eventu
-                            if(!eventRows.isEmpty()){
+                } else if (mode == Mode.event) {
+                        if (!timetableRow.split(";")[0].equals("")) { //mamy start nowego eventu
 
-                                // new i old values of id row!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                //ogarniamy nowy event gdy nie jestesmy na koncu tabeli
-                                    String eventId = "", dayOfTheWeek = "", startTime = "", endTime = "", eventKind = "", module = "", place = "";
+                            String eventId = "", dayOfTheWeek = "", startTime = "", endTime = "", eventType = "";
 
-                                if (row.split(";").length != 0) {
-                                    eventId = row.split(";")[0];
-                                    if (eventId.equals("_event_id")) continue newLine;
-                                    dayOfTheWeek = row.split(";")[1];
-                                    startTime = row.split(";")[2];
-                                    endTime = row.split(";")[3];
-                                    eventKind = row.split(";")[7];
-                                }
-                                List<String> places = new ArrayList<>();
-                                List<String> lecturersNames = new ArrayList<>();
+                            eventId = timetableRow.split(";")[0];
+                            if (eventId.equals("_event_id")) continue;
+                            dayOfTheWeek = timetableRow.split(";")[1];
+                            startTime = timetableRow.split(";")[2];
+                            endTime = timetableRow.split(";")[3];
+                            eventType = timetableRow.split(";")[7];
 
-                                for (String eventRow : eventRows) {
-                                    switch (eventRow.split(";")[18]) {
-                                        case "Module":
-                                            module = eventRow.split(";")[19]; break;
-                                        case "Room":
-                                            places.add(eventRow.split(";")[19]); break;
-                                        case "Staff":
-                                            lecturersNames.add(eventRow.split(";")[19]); break;
-                                    }
-                                }
-                                for (String s : places) {
-                                    place += s + ";";
-                                }
-                                if (place.length() >= 1)
-                                    if (place.charAt(place.length()-1) == ';')
-                                        place = place.substring(0, place.length() - 1);
+                            latestEvent = new Event(eventId, dayOfTheWeek, startTime, endTime, "", "", eventType, "", 0d, 0d);
 
-                                //System.out.println(eventId + " -- " + dayOfTheWeek + " -- " + startTime + " -- " + endTime + " -- " + eventKind + " -- " + module + " -- " + place + " -- " + lecturersNames.toString());
 
-                                Presence presence = new Presence(dayOfTheWeek, startTime, endTime, place, place, eventKind, 0d, 0d);
-                                System.out.println(eventId);
-                                for (String lecturerName : lecturersNames) {
-                                    System.out.println(lecturerName);
-                                    if (getLecturerByName(lecturerName) != null){
-                                        System.out.println(lecturerName);
-                                        getLecturerByName(lecturerName).addPresence(presence, "123");}
-                                }
-
-                                eventRows.clear();
+                        } else if (timetableRow.split(";")[18].equals("Module")) {
+                            latestEvent.setName(timetableRow.split(";")[19]);
+                        } else if (timetableRow.split(";")[18].equals("Staff")) {
+                            String s = timetableRow.split(";")[19];
+                            Lecturer l = getLecturerById(s);
+                            if (l != null){
+                                l.addEvent(latestEvent, latestEvent.getId());
                             }
-                        } else {
-                            eventRows.add(row);
-                            continue newLine;
+
+                        } else if (timetableRow.split(";")[18].equals("Room")) {
+                            latestEvent.setRoomNumber(timetableRow.split(";")[19]);
                         }
-                    } case skip: {
-                        continue newLine;
-                    } default: {
-
-                    }
-
-
-                    for (Lecturer l : lecturers) {
-                        System.out.println(l.toString());
-                        System.out.println("\n");
-                        System.out.println("\n");
-                        System.out.println("-------------------------------------------");
                     }
                 }
+            bufferedReader.close();
 
+            for (Lecturer l : lecturers) {
+                System.out.println(l.toString());
+                System.out.println("\n");
+                System.out.println("-------------------------------------------");
             }
-            csvReader1.close();
-
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
-    private Lecturer getLecturerByName(String lecturerName) {
-        String firstName = getFirstNameFromFuckedUpName(lecturerName);
-        String lastName = getLastNameFromFuckedUpName(lecturerName);
+    private Lecturer getLecturerById(String lecturerId) {
         for (Lecturer lecturer : lecturers) {
-            if (lecturer.getFirstName().equals(firstName) && lecturer.getLastName().equals(lastName))
+            if (lecturer.getLecturerId().equals(lecturerId))
                 return lecturer;
         }
         return null;

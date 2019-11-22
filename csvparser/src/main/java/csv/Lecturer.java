@@ -19,11 +19,11 @@ public class Lecturer implements Comparable<Lecturer> {
         return lastName.compareTo(o.lastName);
     }
 
-    private String lecturerId;
+    private String lecturerId;//_unique_name
     private String firstName;
     private String lastName;
     private String title;
-    private Map<String, Presence> presences;
+    private Map<String, Event> events;
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -31,12 +31,12 @@ public class Lecturer implements Comparable<Lecturer> {
         result.put("firstName", firstName);
         result.put("lastName", lastName);
         result.put("title", title);
-        result.put("presences", presences);
+        result.put("events", events);
         return result;
     }
 
-    public void addPresence(Presence presence, String key){
-        presences.put(key, presence);
+    public void addEvent(Event event, String key){
+        events.put(key, event);
     }
 
     @Override
@@ -46,7 +46,7 @@ public class Lecturer implements Comparable<Lecturer> {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", title='" + title + '\'' +
-                ", presences=" + presences.toString() +
+                ", events=" + events.toString() +
                 '}';
     }
 }
