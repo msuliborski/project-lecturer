@@ -62,7 +62,6 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
         mapFragment.addMarkerAt(latLng, presence.getBuildingName(),
                 presence.getDayOfTheWeek() + " " + presence.getStartTime() + "-" +
                         presence.getEndTime());
-        mapFragment.setLockedOnPlace(true);
         mapFragment.moveCamera(latLng, 15f);
         lecturersActivity.setFragment(mapFragment);
     }

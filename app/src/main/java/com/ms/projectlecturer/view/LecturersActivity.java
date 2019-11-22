@@ -36,7 +36,6 @@ public class LecturersActivity extends AppCompatActivity {
 
     private FragmentManager fragmentManager = getSupportFragmentManager();
     private FragmentTransaction fragmentTransaction;
-    private Fragment currentFragment;
     private LecturersListFragment lecturersListFragment = new LecturersListFragment();
     private LecturerFragment lecturerFragment = new LecturerFragment();
     private MapFragment mapFragment = new MapFragment();
@@ -44,6 +43,8 @@ public class LecturersActivity extends AppCompatActivity {
     private SettingsFragment settingsFragment = new SettingsFragment();
     private CreditsFragment creditsFragment = new CreditsFragment();
     private SidebarFragment sidebarFragment = new SidebarFragment();
+    private Fragment previousFragment = lecturersListFragment;
+    private Fragment currentFragment;
 
     private SharedPreferences sharedPreferences;
     private Configuration configuration;
@@ -122,6 +123,9 @@ public class LecturersActivity extends AppCompatActivity {
     public void setFragment(Fragment newFragment) {
         if (newFragment != null) {
             if(newFragment != currentFragment) {
+                if (newFragment != settingsFragment && newFragment != creditsFragment && newFragment != profileFragment){
+                    previousFragment = currentFragment;
+                }
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.hide(currentFragment);
                 currentFragment = newFragment;
@@ -194,41 +198,18 @@ public class LecturersActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-//        if (currentFragment == _mapScreenFragment) {
-//            if (_mapScreenFragment.getCurrentFragment() == _answerCreator) {
-//                setCurrentFragment(_enquireViewFragment.getPreviousFragment());
-//            } else {
-//                super.onBackPressed();
-//            }
-//        } else if (_currentFragment == _foodModuleFragment) {
-//            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-//            _mapScreenFragment.setLockedOnPlace(false);
-//            setCurrentFragment(_mapScreenFragment);
-//        } else if (_currentFragment == _creditsFragment) {
-//            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-//            _mapScreenFragment.setLockedOnPlace(false);
-//            setCurrentFragment(_mapScreenFragment);
-//        } else if (_currentFragment == _enquireCreatorFragment) {
-//            setCurrentFragment(_enquireCreatorFragment.getPreviousFragment());
-//        } else if (_currentFragment == _settingsFragment) {
-//            setCurrentFragment(_mapScreenFragment);
-//        } else if (_currentFragment == _enquireViewFragment) {
-//            setCurrentFragment(_enquireViewFragment.getPreviousFragment());
-//        } else if (_currentFragment == _placeViewFragment) {
-//            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-//            setCurrentFragment(_mapScreenFragment);
-//        } else if (_currentFragment == _eventsModuleFragment) {
-//            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-//            _mapScreenFragment.setLockedOnPlace(false);
-//            setCurrentFragment(_mapScreenFragment);
-//        } else if (_currentFragment == _facilitiesModuleFragment) {
-//            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-//            _mapScreenFragment.setLockedOnPlace(false);
-//            setCurrentFragment(_mapScreenFragment);
-//        } else if (_currentFragment == _stayModuleFragment) {
-//            _mapScreenFragment.setCurrentFragment(_mainMenuFragment);
-//            _mapScreenFragment.setLockedOnPlace(false);
-//            setCurrentFragment(_mapScreenFragment);
-//        }
+        if (currentFragment == lecturersListFragment) {
+            super.onBackPressed();
+        } else if (currentFragment == profileFragment) {
+            setFragment(previousFragment);
+        } else if (currentFragment == lecturerFragment) {
+            setFragment(lecturersListFragment);
+        } else if (currentFragment == mapFragment) {
+            setFragment(lecturerFragment);
+        } else if (currentFragment == settingsFragment) {
+            setFragment(previousFragment);
+        } else if (currentFragment == creditsFragment) {
+            setFragment(previousFragment);
+        }
     }
 }

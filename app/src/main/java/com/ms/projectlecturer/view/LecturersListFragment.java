@@ -38,7 +38,6 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     private LecturersActivity lecturersActivity;
     private LecturerFragment lecturerFragment;
     private LayoutInflater layoutInflater;
-    private Resources resources;
     private DatabaseReference lecturersReference = FirebaseDatabase.getInstance().getReference("Lecturers");
     private List<Lecturer> lecturers;
     private LecturersListFragment lecturersListFragment = this;
@@ -58,7 +57,6 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
         layoutInflater = inflater;
         return inflater.inflate(R.layout.fragment_lecturers_list, container, false);
     }
@@ -69,7 +67,6 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
 
         lecturersActivity = (LecturersActivity) getActivity();
         lecturerFragment = (LecturerFragment) lecturersActivity.getLecturerFragment();
-        resources = getResources();
         recyclerView = view.findViewById(R.id.lecturersRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
@@ -109,8 +106,5 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        if (!hidden) {
-
-        }
     }
 }
