@@ -11,9 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.AlphaAnimation;
 import android.widget.AdapterView;
-import android.widget.Button;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +21,7 @@ import com.ms.projectlecturer.R;
 import com.google.firebase.database.ValueEventListener;
 import com.ms.projectlecturer.model.Lecturer;
 import com.ms.projectlecturer.model.Presence;
-import com.ms.projectlecturer.util.LecturersRecyclerViewAdapter;
+import com.ms.projectlecturer.util.LecturersAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -32,47 +30,36 @@ import java.util.List;
 import java.util.Map;
 
 
-public class LecturersListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener,
-        LecturersRecyclerViewAdapter.ItemClickListener {
+public class LecturersListFragment extends Fragment implements View.OnClickListener, AdapterView.OnItemSelectedListener, LecturersAdapter.ItemClickListener {
 
-    private RecyclerView _recyclerView;
-    private LecturersRecyclerViewAdapter _adapter;
-    private RecyclerView.LayoutManager _layoutManager;
-    private MapFragment _mapFragment;
-    private LecturersActivity _lecturersActivity;
-    private LecturerFragment _lecturerFragment;
-    private LayoutInflater _inflater;
-    private Button _allButton;
-    private Button _topButton;
-    private Button _addEnquireButton;
-    private AlphaAnimation _buttonClick = new AlphaAnimation(1f, 0.8f);
-    private ValueEventListener _currentListener;
-    private Resources _resources;
-    private DatabaseReference _lecturersReference = FirebaseDatabase.getInstance().getReference("Lecturers");
-    private List<Lecturer> _lecturers;
-    private LecturersListFragment _lecturersListFragment = this;
+    private RecyclerView recyclerView;
+    private LecturersAdapter lecturersAdapter;
+    private RecyclerView.LayoutManager layoutManager;
+    private LecturersActivity lecturersActivity;
+    private LecturerFragment lecturerFragment;
+    private LayoutInflater layoutInflater;
+    private Resources resources;
+    private DatabaseReference lecturersReference = FirebaseDatabase.getInstance().getReference("Lecturers");
+    private List<Lecturer> lecturers;
+    private LecturersListFragment lecturersListFragment = this;
 
     @Override
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               final int position, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
     }
 
     @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-        // TODO Auto-generated method stub
-    }
+    public void onNothingSelected(AdapterView<?> parent) { }
 
     @Override
     public void onItemClick(View view, int position) {
-        _lecturerFragment.setLecturer(_lecturers.get(position));
-        _lecturersActivity.setCurrentFragment(_lecturerFragment);
+        lecturerFragment.setLecturer(lecturers.get(position));
+        lecturersActivity.setFragment(lecturerFragment);
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        _inflater = inflater;
+        layoutInflater = inflater;
         return inflater.inflate(R.layout.fragment_lecturers_list, container, false);
     }
 
@@ -80,21 +67,18 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        _lecturersActivity = (LecturersActivity) getActivity();
-        _lecturerFragment = (LecturerFragment) _lecturersActivity.getLecturerFragment();
-        _resources = getResources();
-        _mapFragment = _lecturersActivity.getMapScreenFragment();
-        _recyclerView = view.findViewById(R.id.lecturersRecyclerView);
-        _recyclerView.setHasFixedSize(true);
-        _layoutManager = new LinearLayoutManager(getActivity());
-        _recyclerView.setLayoutManager(_layoutManager);
+        lecturersActivity = (LecturersActivity) getActivity();
+        lecturerFragment = (LecturerFragment) lecturersActivity.getLecturerFragment();
+        resources = getResources();
+        recyclerView = view.findViewById(R.id.lecturersRecyclerView);
+        recyclerView.setHasFixedSize(true);
+        layoutManager = new LinearLayoutManager(getActivity());
+        recyclerView.setLayoutManager(layoutManager);
 
-        _buttonClick.setDuration(300);
-
-        _lecturersReference.addValueEventListener(new ValueEventListener() {
+        lecturersReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                _lecturers = new ArrayList<>();
+                lecturers = new ArrayList<>();
                 for (DataSnapshot lecturerDataSnapshot : dataSnapshot.getChildren()) {
                     Map<String, Presence> presences = new HashMap<>();
                     for (DataSnapshot presencesDataSnapshot : lecturerDataSnapshot.child("presences").getChildren()){
@@ -102,13 +86,13 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
                     }
                     Lecturer lecturer = new Lecturer(lecturerDataSnapshot.getKey(), lecturerDataSnapshot.child("firstName").getValue().toString(),
                             lecturerDataSnapshot.child("lastName").getValue().toString(), lecturerDataSnapshot.child("title").getValue().toString(), presences);
-                    _lecturers.add(lecturer);
+                    lecturers.add(lecturer);
                 }
-                Collections.sort(_lecturers);
-                Collections.reverse(_lecturers);
-                _adapter = new LecturersRecyclerViewAdapter(_inflater, _lecturers, getContext());
-                _recyclerView.setAdapter(_adapter);
-                _adapter.setClickListener(_lecturersListFragment);
+                Collections.sort(lecturers);
+                Collections.reverse(lecturers);
+                lecturersAdapter = new LecturersAdapter(layoutInflater, lecturers, getContext());
+                recyclerView.setAdapter(lecturersAdapter);
+                lecturersAdapter.setClickListener(lecturersListFragment);
             }
 
             @Override
@@ -119,15 +103,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     }
 
     @Override
-    public void onClick(View view) {
-        if (view == _topButton) {
-            view.startAnimation(_buttonClick);
-        } else if (view == _allButton) {
-            view.startAnimation(_buttonClick);
-        } else if (view == _addEnquireButton) {
-            _lecturersActivity.setCurrentFragment(_mapFragment);
-        }
-    }
+    public void onClick(View view) { }
 
 
     @Override

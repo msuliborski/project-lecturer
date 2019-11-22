@@ -18,7 +18,6 @@ import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.ms.projectlecturer.R;
-import com.ms.projectlecturer.controller.ProgramClient;
 import com.ms.projectlecturer.util.Constants;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -26,10 +25,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
@@ -46,7 +43,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     private ProgressDialog _progressDialog;
     private CallbackManager _callbackManager;
     private AlertDialog _error;
-    private ProgramClient _programClient = ProgramClient.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,11 +55,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         builder.setMessage(getResources().getString(R.string.signInErrorMsg));
         builder.setCancelable(true);
         builder.setNeutralButton(android.R.string.ok,
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
-                    }
-                });
+                (dialog, id) -> dialog.cancel());
 
         _error = builder.create();
 
@@ -150,27 +142,24 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         _auth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            String userId = _auth.getCurrentUser().getUid();
-                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-                            currentUserDb.setValue(true);
-                            //currentUserDb.
-                            _progressDialog.dismiss();
-                            startActivity(_mainScreen);
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        String userId = _auth.getCurrentUser().getUid();
+                        DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+                        currentUserDb.setValue(true);
+                        //currentUserDb.
+                        _progressDialog.dismiss();
+                        startActivity(_mainScreen);
 
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            _progressDialog.dismiss();
-                            Toast.makeText(LogInActivity.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
-
-                        }
-
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        _progressDialog.dismiss();
+                        Toast.makeText(LogInActivity.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
 
                     }
+
+
                 });
     }
 
@@ -206,26 +195,23 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
         _auth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            String userId = _auth.getCurrentUser().getUid();
-                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-                            currentUserDb.setValue(true);
-                            _progressDialog.dismiss();
-                            startActivity(_mainScreen);
-                        } else {
-                            // If sign in fails, display a message to the user.
-                            _progressDialog.dismiss();
-                            _error.show();
-                            if (isFbLoggedIn()) {
-                                facebookLogout();
-                            }
+                .addOnCompleteListener(this, task -> {
+                    if (task.isSuccessful()) {
+                        // Sign in success, update UI with the signed-in user's information
+                        String userId = _auth.getCurrentUser().getUid();
+                        DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+                        currentUserDb.setValue(true);
+                        _progressDialog.dismiss();
+                        startActivity(_mainScreen);
+                    } else {
+                        // If sign in fails, display a message to the user.
+                        _progressDialog.dismiss();
+                        _error.show();
+                        if (isFbLoggedIn()) {
+                            facebookLogout();
                         }
-
                     }
+
                 });
     }
 

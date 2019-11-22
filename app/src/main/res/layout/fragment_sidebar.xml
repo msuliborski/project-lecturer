@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -9,113 +9,83 @@
     android:gravity="center"
     android:background="@color/backgroundDark">
 
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
-
     <ImageView
-        android:id="@+id/profile"
+        android:id="@+id/profileImageView"
         android:layout_width="150dp"
         android:layout_height="150dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/empty_avatar" />
-
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="0dp" />
-
 
     <Button
         android:id="@+id/profileButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/card_background"
         android:text="@string/profileButton"
         android:textAlignment="center"
-        android:textColor="@color/black" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-
-    <Button
-        android:id="@+id/foodButton"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/card_background"
-        android:text="@string/mapButton"
-        android:textColor="@color/black" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
 
     <Button
-        android:id="@+id/lecturerButton"
+        android:id="@+id/lecturersButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@drawable/card_background"
-        android:text="@string/lecturerButton"
-        android:textColor="@color/black" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
-
-    <Button
-        android:id="@+id/home"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/card_background"
         android:text="@string/lecturersButton"
-        android:textColor="@color/black" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/profileButton" />
 
     <Button
-        android:id="@+id/wikamp"
+        android:id="@+id/wikampButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/card_background"
         android:text="@string/wikampButton"
-        android:textColor="@color/black" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
+        android:textColor="@color/black"
+        app:layout_constraintTop_toBottomOf="@+id/lecturersButton" />
 
     <Button
-        android:id="@+id/sett"
+        android:id="@+id/settingsButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/card_background"
         android:text="@string/settingsButton"
-        android:textColor="@color/black" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/wikampButton" />
 
     <Button
         android:id="@+id/creditsButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/card_background"
         android:text="@string/creditsButton"
-        android:textColor="@color/black" />
-    <Space
-        android:layout_width="match_parent"
-        android:layout_height="10dp" />
-
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/settingsButton" />
 
     <Button
-        android:id="@+id/sign_out"
+        android:id="@+id/logOutButton"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@drawable/card_background"
         android:text="@string/logoutButton"
-        android:textColor="@color/black" />
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

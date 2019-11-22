@@ -12,31 +12,31 @@ import com.ms.projectlecturer.model.Presence;
 
 import java.util.List;
 
-public class PresencesRecyclerViewAdapter extends RecyclerView.Adapter<PresencesRecyclerViewAdapter.ViewHolder> {
+public class PresencesAdapter extends RecyclerView.Adapter<PresencesAdapter.ViewHolder> {
 
-    private List<Presence> _presences;
-    private LayoutInflater _inflater;
-    private ItemClickListener _clickListener;
-    private Context _context;
+    private List<Presence> presences;
+    private LayoutInflater layoutInflater;
+    private ItemClickListener itemClickListener;
+    private Context context;
 
     // data is passed into the constructor
-    public PresencesRecyclerViewAdapter(LayoutInflater inflater, List<Presence> presences, Context context) {
-        _presences = presences;
-        _inflater = inflater;
-        _context = context;
+    public PresencesAdapter(LayoutInflater inflater, List<Presence> presences, Context context) {
+        this.presences = presences;
+        this.layoutInflater = inflater;
+        this.context = context;
     }
 
     // inflates the row layout from xml when needed
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = _inflater.inflate(R.layout.element_presence, parent, false);
+        View view = layoutInflater.inflate(R.layout.element_presence, parent, false);
         return new ViewHolder(view);
     }
 
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Presence presence = _presences.get(position);
+        Presence presence = presences.get(position);
         TextView dayOfTheWeekTextView = holder.itemView.findViewById(R.id.dayOfTheWeekTextView);
         TextView timeTextView = holder.itemView.findViewById(R.id.timeTextView);
         TextView roomNumberTextView = holder.itemView.findViewById(R.id.roomNumberTextView);
@@ -51,7 +51,7 @@ public class PresencesRecyclerViewAdapter extends RecyclerView.Adapter<Presences
     // total number of rows
     @Override
     public int getItemCount() {
-        return _presences.size();
+        return presences.size();
     }
 
 
@@ -64,18 +64,18 @@ public class PresencesRecyclerViewAdapter extends RecyclerView.Adapter<Presences
 
         @Override
         public void onClick(View view) {
-            if (_clickListener != null) _clickListener.onItemClick(view, getAdapterPosition());
+            if (itemClickListener != null) itemClickListener.onItemClick(view, getAdapterPosition());
         }
     }
 
     // convenience method for getting data at click position
     Presence getItem(int id) {
-        return _presences.get(id);
+        return presences.get(id);
     }
 
     // allows clicks events to be caught
     public void setClickListener(ItemClickListener itemClickListener) {
-        _clickListener = itemClickListener;
+        this.itemClickListener = itemClickListener;
     }
 
     // parent activity will implement this method to respond to click events
