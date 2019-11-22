@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,30 +20,26 @@ import com.google.firebase.database.ValueEventListener;
 import com.ms.projectlecturer.R;
 import com.ms.projectlecturer.model.Lecturer;
 import com.ms.projectlecturer.model.Presence;
-import com.ms.projectlecturer.util.PresencesRecyclerViewAdapter;
+import com.ms.projectlecturer.util.PresencesAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class LecturerFragment extends Fragment implements PresencesRecyclerViewAdapter.ItemClickListener,
-        View.OnClickListener {
-
+public class LecturerFragment extends Fragment implements PresencesAdapter.ItemClickListener, View.OnClickListener {
     private RecyclerView recyclerView;
-    private PresencesRecyclerViewAdapter adapter;
+    private PresencesAdapter presencesAdapter;
     private List<Presence> presences;
     private ValueEventListener currentListener;
     private DatabaseReference lecturerReference;
     private LecturerFragment lecturerFragment;
-    private LayoutInflater inflater;
+    private LayoutInflater layoutInflater;
     private MapFragment mapFragment;
     private LecturersActivity lecturersActivity;
     private RecyclerView.LayoutManager layoutManager;
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        this.inflater = inflater;
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        this.layoutInflater = inflater;
         return inflater.inflate(R.layout.fragment_lecturer, container, false);
     }
 
@@ -53,7 +48,7 @@ public class LecturerFragment extends Fragment implements PresencesRecyclerViewA
         super.onViewCreated(view, savedInstanceState);
         lecturerFragment = this;
         lecturersActivity = (LecturersActivity) getActivity();
-        mapFragment = lecturersActivity.getMapScreenFragment();
+        mapFragment = lecturersActivity.getMapFragment();
         recyclerView = view.findViewById(R.id.presencesRecyclerView);
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
@@ -69,13 +64,11 @@ public class LecturerFragment extends Fragment implements PresencesRecyclerViewA
                         presence.getEndTime());
         mapFragment.setLockedOnPlace(true);
         mapFragment.moveCamera(latLng, 15f);
-        lecturersActivity.setCurrentFragment(mapFragment);
+        lecturersActivity.setFragment(mapFragment);
     }
 
     @Override
-    public void onClick(View view) {
-
-    }
+    public void onClick(View view) { }
 
     public void setLecturer(Lecturer lecturer) {
         if (currentListener != null) {
@@ -90,9 +83,9 @@ public class LecturerFragment extends Fragment implements PresencesRecyclerViewA
                      Presence presence = childSnapshot.getValue(Presence.class);
                      presences.add(presence);
                }
-                adapter = new PresencesRecyclerViewAdapter(inflater, presences, getContext());
-                recyclerView.setAdapter(adapter);
-                adapter.setClickListener(lecturerFragment);
+                presencesAdapter = new PresencesAdapter(layoutInflater, presences, getContext());
+                recyclerView.setAdapter(presencesAdapter);
+                presencesAdapter.setClickListener(lecturerFragment);
             }
 
             @Override

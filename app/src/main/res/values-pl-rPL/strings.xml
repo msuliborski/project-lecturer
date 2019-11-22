@@ -8,6 +8,8 @@
     <!--    Settings-->
     <string name="settings">Ustawienia</string>
     <string name="language">Język:</string>
+    <string name="languageEnglish">Angielski</string>
+    <string name="languagePolish">Polski</string>
 
     <!--    Credits-->
     <string name="credits">Podziękowania</string>

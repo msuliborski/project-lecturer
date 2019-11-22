@@ -97,7 +97,7 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
         if (savedInstanceState != null) {
             mapViewBundle = savedInstanceState.getBundle(Constants.MAPVIEW_BUNDLE_KEY);
         }
-        _mapView = (MapView) view.findViewById(R.id.map);
+        _mapView = (MapView) view.findViewById(R.id.mapView);
         _mapView.onCreate(mapViewBundle);
         _mapView.getMapAsync(this);
         _fusedLocationClient = LocationServices.getFusedLocationProviderClient(getActivity());
@@ -119,7 +119,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
                     if (location == null) {
                         if (_invokeCounter < 5) {
                             try {
-                                //Toast.makeText(getContext(), "KURWA", Toast.LENGTH_SHORT).show();
                                 Thread.sleep(400);
                                 _invokeCounter++;
                                 getLastKnownLocationWithOnNullInvoking();
@@ -299,10 +298,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
         _mapView.onResume();
         if (checkMapServices() && _locationPermissionGranted) {
             getLastKnownLocationWithOnNullInvoking();
-            Log.d("tag", "onComplete: kurwa32");
         } else {
             getLocationPermission();
-            Log.d("tag", "onComplete: kurwa33");
         }
 
     }
@@ -385,7 +382,6 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
         //_lockedOnPlace = false;
         LatLng latLng = marker.getPosition();
         String placeID = _placesOnMap.get(latLng.latitude + "_" + latLng.longitude);
-        Log.d("tag", "onComplete: kurwAAAA");
     }
 
 
