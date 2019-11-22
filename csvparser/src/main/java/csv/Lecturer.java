@@ -34,4 +34,19 @@ public class Lecturer implements Comparable<Lecturer> {
         result.put("presences", presences);
         return result;
     }
+
+    public void addPresence(Presence presence, String key){
+        presences.put(key, presence);
+    }
+
+    @Override
+    public String toString() {
+        return "Lecturer{" +
+                "lecturerId='" + lecturerId + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", title='" + title + '\'' +
+                ", presences=" + presences.toString() +
+                '}';
+    }
 }
