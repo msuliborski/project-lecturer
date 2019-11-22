@@ -33,7 +33,7 @@ public class SettingsFragment extends Fragment implements AdapterView.OnItemSele
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         String[] spinnerPaths = new String[]{
-                getResources().getString(R.string.languageEnglish),
+                this.getResources().getString(R.string.languageEnglish),
                 getResources().getString(R.string.languagePolish)};
 
         languageSpinner = view.findViewById(R.id.languageSpinner);
