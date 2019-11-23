@@ -34,8 +34,8 @@ public class Lecturer implements Comparable<Lecturer> {
     private String firstName;
     private String lastName;
     private String title;
-    private Map<String, Presence> presences;
     private String imageUrl;
+    private Map<String, Presence> presences;
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -43,8 +43,8 @@ public class Lecturer implements Comparable<Lecturer> {
         result.put("firstName", firstName);
         result.put("lastName", lastName);
         result.put("title", title);
-        result.put("presences", presences);
         result.put("imageUrl", imageUrl);
+        result.put("presences", presences);
         return result;
     }
 

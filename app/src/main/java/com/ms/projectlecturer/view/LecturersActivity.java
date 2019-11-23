@@ -179,17 +179,17 @@ public class LecturersActivity extends AppCompatActivity {
         presenceSet4.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
         presenceSet4.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
 
-        Spawner.spawnNewLecturer("Jan", "Kowalski", "dr. inż.", presenceSet1);
-        Spawner.spawnNewLecturer("Piotr", "Nowak", "dr. inż.", presenceSet2);
-        Spawner.spawnNewLecturer("Dariusz", "Piekarski", "dr.", presenceSet1);
-        Spawner.spawnNewLecturer("Artur", "Boski", "dr. inż., hab.", presenceSet3);
-        Spawner.spawnNewLecturer("Beata", "Adamska", "dr. inż.", presenceSet1);
-        Spawner.spawnNewLecturer("Agata", "Grzelak", "dr. inż.", presenceSet4);
-        Spawner.spawnNewLecturer("Adam", "Komar", "dr. inż.", presenceSet1);
-        Spawner.spawnNewLecturer("Arkadiusz", "Błaszczyk", "prof. hab.", presenceSet3);
-        Spawner.spawnNewLecturer("Michał", "Wilanowski", "dr. inż.", presenceSet1);
-        Spawner.spawnNewLecturer("Wojciech", "Lech", "prof.", presenceSet2);
-        Spawner.spawnNewLecturer("Filip", "Wojciechowski", "dr. inż.", presenceSet4);
+        Spawner.spawnNewLecturer("Piotr", "Napieralski", "dr. inż.", "https://ftims.edu.p.lodz.pl/pluginfile.php/1378/user/icon/adaptable/f3?rev=3554694", presenceSet1);
+        Spawner.spawnNewLecturer("Piotr", "Nowak", "dr. inż.", "", presenceSet2);
+        Spawner.spawnNewLecturer("Dariusz", "Piekarski", "dr.", "", presenceSet1);
+        Spawner.spawnNewLecturer("Artur", "Boski", "dr. inż., hab.", "", presenceSet3);
+        Spawner.spawnNewLecturer("Beata", "Adamska", "dr. inż.", "", presenceSet1);
+        Spawner.spawnNewLecturer("Agata", "Grzelak", "dr. inż.", "", presenceSet4);
+        Spawner.spawnNewLecturer("Adam", "Komar", "dr. inż.", "", presenceSet1);
+        Spawner.spawnNewLecturer("Arkadiusz", "Błaszczyk", "prof. hab.", "", presenceSet3);
+        Spawner.spawnNewLecturer("Michał", "Wilanowski", "dr. inż.", "", presenceSet1);
+        Spawner.spawnNewLecturer("Wojciech", "Lech", "prof.", "", presenceSet2);
+        Spawner.spawnNewLecturer("Filip", "Wojciechowski", "dr. inż.", "", presenceSet4);
     }
 
     @Override
