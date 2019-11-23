@@ -51,9 +51,6 @@ public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         Lecturer lecturer = filteredLecturers.get(position);
 
-        ImageButton lecturerAvatarImageView = holder.itemView.findViewById(R.id.lecturerAvatarImageView);
-//        lecturerAvatarImageView.setImageResource();
-        // set obrazka
         TextView lecturerTitleTextView = holder.itemView.findViewById(R.id.lecturerTitleTextView);
         TextView lecturerFirstNameTextView = holder.itemView.findViewById(R.id.lecturerFirstNameTextView);
         TextView lecturerLastNameTextView = holder.itemView.findViewById(R.id.lecturerLastNameTextView);
