@@ -138,9 +138,10 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        String userId = _auth.getCurrentUser().getUid();
-                        DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-                        currentUserDb.setValue(true);
+//                        String userId = _auth.getCurrentUser().getUid();
+//                        _auth.getUid()
+//                        DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
+//                        currentUserDb.setValue(true);
                         //currentUserDb.
                         _progressDialog.dismiss();
                         startActivity(_mainScreen);
