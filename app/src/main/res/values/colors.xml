@@ -5,16 +5,19 @@
 <!--    <color name="colorAccent">#D81B60</color>-->
 <!--    <color name="lightBlueBackground">#94F0FD</color>-->
 
-
-
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
 
-    <color name="colorPrimaryDark">#4f0000</color>
-    <color name="colorPrimary">#800001</color>
-    <color name="colorAccent">#800001</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimary">#212121</color>
+    <color name="colorAccent">#212121</color>
 
-    <color name="backgroundLight">#f5f5f6</color>
-    <color name="backgroundDark">#e1e2e1</color>
+    <color name="backgroundDark">#303030</color>
+
+    <color name="dayPressed">@color/colorPrimary</color>
+    <color name="daySelected">@color/colorPrimary</color>
+    <color name="dayDeselected">@color/backgroundDark</color>
+    <color name="daySelectedTextColor">@color/white</color>
+    <color name="dayDeselectedTextColor">@android:color/black</color>
 
 </resources>
