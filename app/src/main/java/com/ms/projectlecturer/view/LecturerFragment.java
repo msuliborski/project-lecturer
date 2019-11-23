@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,8 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LecturerFragment extends Fragment implements PresencesAdapter.ItemClickListener, View.OnClickListener {
+
+    private TextView lecturerTitleTextView;
+    private TextView lecturerFirstNameTextView;
+    private TextView lecturerLastNameTextView;
+
     private RecyclerView recyclerView;
     private PresencesAdapter presencesAdapter;
+    private Lecturer lecturer;
     private List<Presence> presences;
     private ValueEventListener currentListener;
     private DatabaseReference lecturerReference;
@@ -53,6 +60,10 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+
+        lecturerTitleTextView = view.findViewById(R.id.lecturerTitleTextView);
+        lecturerFirstNameTextView = view.findViewById(R.id.lecturerFirstNameTextView);
+        lecturerLastNameTextView = view.findViewById(R.id.lecturerLastNameTextView);
     }
 
     @Override
@@ -74,6 +85,9 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
             lecturerReference.removeEventListener(currentListener);
         }
         lecturerReference = FirebaseDatabase.getInstance().getReference().child("Lecturers").child(lecturer.getLecturerId());
+        lecturerTitleTextView.setText(lecturer.getTitle());
+        lecturerFirstNameTextView.setText(lecturer.getFirstName());
+        lecturerLastNameTextView.setText(lecturer.getLastName());
         currentListener = lecturerReference.child("presences").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

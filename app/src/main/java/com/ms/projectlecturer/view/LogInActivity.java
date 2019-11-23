@@ -2,10 +2,8 @@ package com.ms.projectlecturer.view;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -101,8 +99,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         if (_auth.getCurrentUser() != null) {
             startActivity(_mainScreen);
         }
-
-
     }
 
 
@@ -220,8 +216,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         return accessToken != null;
     }
 
-    private void facebookLogout()
-    {
+    private void facebookLogout() {
         LoginManager.getInstance().logOut();
         AccessToken.setCurrentAccessToken(null);
     }

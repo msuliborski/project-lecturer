@@ -1,9 +1,9 @@
 package com.ms.projectlecturer.view;
 
-import android.content.res.Resources;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +41,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     private DatabaseReference lecturersReference = FirebaseDatabase.getInstance().getReference("Lecturers");
     private List<Lecturer> lecturers;
     private LecturersListFragment lecturersListFragment = this;
+    private SearchView lecturerSearchView;
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, final int position, long id) {
@@ -71,6 +72,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
+        lecturerSearchView = view.findViewById(R.id.lecturerSearchView);
 
         lecturersReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -86,8 +88,19 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
                     lecturers.add(lecturer);
                 }
                 Collections.sort(lecturers);
-                Collections.reverse(lecturers);
                 lecturersAdapter = new LecturersAdapter(layoutInflater, lecturers, getContext());
+                lecturerSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                    @Override
+                    public boolean onQueryTextSubmit(String text) {
+                        return false;
+                    }
+
+                    @Override
+                    public boolean onQueryTextChange(String text) {
+                        lecturersAdapter.getFilter().filter(text);
+                        return true;
+                    }
+                });
                 recyclerView.setAdapter(lecturersAdapter);
                 lecturersAdapter.setClickListener(lecturersListFragment);
             }

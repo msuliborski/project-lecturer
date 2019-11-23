@@ -5,23 +5,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Context;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.ms.projectlecturer.R;
 import com.ms.projectlecturer.model.Lecturer;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.ViewHolder> {
+public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.ViewHolder> implements Filterable {
 
-    private List<Lecturer> lecturers;
+    private List<Lecturer> allLecturers;
+    private List<Lecturer> filteredLecturers;
     private LayoutInflater layoutInflater;
     private ItemClickListener itemClickListener;
     private Context context;
 
     // data is passed into the constructor
     public LecturersAdapter(LayoutInflater inflater, List<Lecturer> lecturers, Context context) {
-        this.lecturers = lecturers;
+        this.allLecturers = lecturers;
+        this.filteredLecturers = lecturers;
         this.layoutInflater = inflater;
         this.context = context;
     }
@@ -36,7 +41,7 @@ public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.View
     // binds the data to the TextView in each row
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Lecturer lecturer = lecturers.get(position);
+        Lecturer lecturer = filteredLecturers.get(position);
 
         TextView lecturerTitleTextView = holder.itemView.findViewById(R.id.lecturerTitleTextView);
         TextView lecturerFirstNameTextView = holder.itemView.findViewById(R.id.lecturerFirstNameTextView);
@@ -50,7 +55,48 @@ public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.View
     // total number of rows
     @Override
     public int getItemCount() {
-        return lecturers.size();
+        return filteredLecturers.size();
+    }
+
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @SuppressWarnings("unchecked")
+            @Override
+            protected void publishResults(CharSequence constraint, FilterResults results) {
+                filteredLecturers = (List<Lecturer>) results.values;
+                notifyDataSetChanged();
+            }
+
+            @Override
+            protected FilterResults performFiltering(CharSequence constraint) {
+                List<Lecturer> filteredResults = null;
+                if (constraint.length() == 0) {
+                    filteredResults = allLecturers;
+                } else {
+                    filteredResults = getFilteredResults(constraint.toString().toLowerCase());
+                }
+
+                FilterResults results = new FilterResults();
+                results.values = filteredResults;
+
+                return results;
+            }
+        };
+    }
+
+
+    protected List<Lecturer> getFilteredResults(String constraint) {
+        List<Lecturer> results = new ArrayList<>();
+
+        for (Lecturer l : allLecturers) {
+            String ls = l.getFirstName() + l.getLastName();
+            if (ls.toLowerCase().contains(constraint)) {
+                results.add(l);
+            }
+        }
+        return results;
     }
 
 
@@ -69,7 +115,7 @@ public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.View
 
     // convenience method for getting data at click position
     Lecturer getItem(int id) {
-        return lecturers.get(id);
+        return filteredLecturers.get(id);
     }
 
     // allows clicks events to be caught
