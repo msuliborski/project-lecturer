@@ -1,5 +1,6 @@
 package com.ms.projectlecturer.view;
 
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +27,7 @@ import com.ms.projectlecturer.util.PresencesAdapter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Locale;
@@ -37,7 +39,7 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
     private TextView lecturerTitleTextView;
     private TextView lecturerFirstNameTextView;
     private TextView lecturerLastNameTextView;
-
+    private Resources resources;
     private RecyclerView recyclerView;
     private PresencesAdapter presencesAdapter;
     private Lecturer lecturer;
@@ -67,12 +69,13 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
         recyclerView.setHasFixedSize(true);
         layoutManager = new LinearLayoutManager(getActivity());
         recyclerView.setLayoutManager(layoutManager);
-
+        resources = getContext().getResources();
         lecturerTitleTextView = view.findViewById(R.id.lecturerTitleTextView);
         lecturerFirstNameTextView = view.findViewById(R.id.lecturerFirstNameTextView);
         lecturerLastNameTextView = view.findViewById(R.id.lecturerLastNameTextView);
         dayPicker = view.findViewById(R.id.dayPicker);
-        dayPicker.setLocale(Locale.ENGLISH);
+        Locale locale = lecturersActivity.getConf().locale;
+        dayPicker.setLocale(locale);
         dayPicker.setDaySelectionChangedListener(selectedDays -> {
             String selectedDaysString = "";
             for (MaterialDayPicker.Weekday day : selectedDays){
@@ -84,10 +87,11 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
 
     @Override
     public void onItemClick(View view, int position) {
-        Presence presence = presences.get(position);
+        Presence presence = presencesAdapter.getFilteredPresences().get(position);
         LatLng latLng = new LatLng(presence.getLat(), presence.getLng());
+        int dayOfWeekId = resources.getIdentifier(presence.getDayOfTheWeek().getLabel(), "string", getContext().getPackageName());
         mapFragment.addMarkerAt(latLng, presence.getBuildingName(),
-                presence.getDayOfTheWeek() + " " + presence.getStartTime() + "-" +
+                resources.getString(dayOfWeekId) + " " + presence.getStartTime() + "-" +
                         presence.getEndTime());
         mapFragment.moveCamera(latLng, 15f);
         lecturersActivity.setFragment(mapFragment);
@@ -112,9 +116,10 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
                      Presence presence = childSnapshot.getValue(Presence.class);
                      presences.add(presence);
                }
+                Collections.sort(presences);
                 presencesAdapter = new PresencesAdapter(layoutInflater, presences, getContext());
                 recyclerView.setAdapter(presencesAdapter);
-                dayPicker.selectDay(MaterialDayPicker.Weekday.valueOf(new GregorianCalendar().getDisplayName( Calendar.DAY_OF_WEEK ,Calendar.LONG, Locale.getDefault()).toUpperCase()));
+                dayPicker.selectDay(MaterialDayPicker.Weekday.valueOf(new GregorianCalendar().getDisplayName( Calendar.DAY_OF_WEEK ,Calendar.LONG, Locale.ENGLISH).toUpperCase()));
                 presencesAdapter.setClickListener(lecturerFragment);
             }
 

@@ -46,6 +46,15 @@
     <string name="creditsButton">Credits</string>
     <string name="logoutButton">Log out</string>
 
+<!--   Week labels-->
+    <string name="Monday">Monday</string>
+    <string name="Tuesday">Tuesday</string>
+    <string name="Wednesday">Wednesday</string>
+    <string name="Thursday">Thursday</string>
+    <string name="Friday">Friday</string>
+    <string name="Saturday">Saturday</string>
+    <string name="Sunday">Sunday</string>
+
 
 
 </resources>

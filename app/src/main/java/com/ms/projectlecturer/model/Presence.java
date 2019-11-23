@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Presence {
+public class Presence implements Comparable<Presence>{
     private DayOfTheWeek dayOfTheWeek;
     private String startTime;
     private String endTime;
@@ -42,5 +42,10 @@ public class Presence {
         return new StringBuilder().append(startTime).append(" - ").append(endTime).append("\n")
                 .append(resources.getString(R.string.building)).append(": ").append(buildingName)
                 .append(resources.getString(R.string.room)).append(": ").append(roomNumber).toString();
+    }
+
+    @Override
+    public int compareTo(Presence presence) {
+        return Integer.compare(dayOfTheWeek.ordinal(), presence.dayOfTheWeek.ordinal());
     }
 }
