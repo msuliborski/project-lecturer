@@ -3,29 +3,31 @@ package com.ms.projectlecturer.model;
 import com.google.firebase.database.IgnoreExtraProperties;
 
 import java.util.HashMap;
+import java.util.Map;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @IgnoreExtraProperties
 public class User {
 
-    private String userID;
-    private String username;
-    private String email;
+    private HashMap<String, String> Favourites;
 
-    public User (final String userID, final String username, final String email) {
-        this.userID = userID;
-        this.username = username;
-        this.email = email;
+    public static User generateNewUser() {
+        User user = new User();
+        HashMap<String, String> Favourites = new HashMap<>();
+        user.setFavourites(Favourites);
+        return user;
     }
 
-    public final String getUsername () {
-        return username;
-    }
 
-    public final String getEmail() {
-        return email;
-    }
-
-    public String getUserID() {
-        return userID;
+    public Map<String, Object> toMap() {
+        HashMap<String, Object> result = new HashMap<>();
+        result.put("Favoorites", Favourites);
+        return result;
     }
 }

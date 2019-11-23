@@ -1,5 +1,6 @@
 package com.ms.projectlecturer.util;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,28 +9,34 @@ import android.widget.Filterable;
 import android.widget.TextView;
 import android.content.Context;
 import androidx.recyclerview.widget.RecyclerView;
+import lombok.Getter;
 
 import com.ms.projectlecturer.R;
 import com.ms.projectlecturer.model.Lecturer;
 import com.ms.projectlecturer.model.Presence;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class PresencesAdapter extends RecyclerView.Adapter<PresencesAdapter.ViewHolder> implements Filterable {
 
     private List<Presence> allPresences;
+    @Getter
     private List<Presence> filteredPresences;
     private LayoutInflater layoutInflater;
     private ItemClickListener itemClickListener;
     private Context context;
+    private Resources resources;
 
     // data is passed into the constructor
     public PresencesAdapter(LayoutInflater inflater, List<Presence> presences, Context context) {
         this.allPresences = presences;
         this.filteredPresences = presences;
+        Collections.sort(filteredPresences);
         this.layoutInflater = inflater;
         this.context = context;
+        resources = context.getResources();
     }
 
     // inflates the row layout from xml when needed
@@ -47,8 +54,8 @@ public class PresencesAdapter extends RecyclerView.Adapter<PresencesAdapter.View
         TextView timeTextView = holder.itemView.findViewById(R.id.timeTextView);
         TextView roomNumberTextView = holder.itemView.findViewById(R.id.roomNumberTextView);
         TextView buildingNameTextView = holder.itemView.findViewById(R.id.buildingNameTextView);
-
-        dayOfTheWeekTextView.setText(presence.getDayOfTheWeek().toString());
+        int dayOfWeekId = resources.getIdentifier(presence.getDayOfTheWeek().getLabel(), "string", context.getPackageName());
+        dayOfTheWeekTextView.setText(resources.getString(dayOfWeekId));
         timeTextView.setText(presence.getStartTime() + " - " + presence.getEndTime());
         roomNumberTextView.setText(presence.getRoomNumber());
         buildingNameTextView.setText(presence.getBuildingName());
@@ -68,6 +75,7 @@ public class PresencesAdapter extends RecyclerView.Adapter<PresencesAdapter.View
             @Override
             protected void publishResults(CharSequence constraint, FilterResults results) {
                 filteredPresences = (List<Presence>) results.values;
+                Collections.sort(filteredPresences);
                 notifyDataSetChanged();
             }
 

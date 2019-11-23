@@ -223,7 +223,8 @@ public class MapFragment extends Fragment implements View.OnClickListener, OnMap
                 .title(title)
                 .snippet(text)
                 .icon(BitmapDescriptorFactory.defaultMarker(colour)));
-    }
+        marker.showInfoWindow();
+   }
 
     @Override
     public void onInfoWindowClick(Marker marker) { }

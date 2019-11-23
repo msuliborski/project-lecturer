@@ -35,4 +35,14 @@
     <string name="logoutButton">Wyloguj się</string>
 
 
+    <!--   Week labels-->
+    <string name="Monday">Poniedziałek</string>
+    <string name="Tuesday">Wtorek</string>
+    <string name="Wednesday">Środa</string>
+    <string name="Thursday">Czwartek</string>
+    <string name="Friday">Piątek</string>
+    <string name="Saturday">Sobota</string>
+    <string name="Sunday">Niedziela</string>
+
+
 </resources>

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
@@ -15,7 +17,11 @@ import com.facebook.FacebookException;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
 import com.ms.projectlecturer.R;
+import com.ms.projectlecturer.model.User;
 import com.ms.projectlecturer.util.Constants;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -33,14 +39,14 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class LogInActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private SignInButton _googleBtn;
-    private LoginButton _facebookBtn;
-    private FirebaseAuth _auth = FirebaseAuth.getInstance();
-    private GoogleSignInClient _googleSignInClient;
-    private Intent _mainScreen;
-    private ProgressDialog _progressDialog;
-    private CallbackManager _callbackManager;
-    private AlertDialog _error;
+    private SignInButton googleBtn;
+    private LoginButton facebookBtn;
+    private FirebaseAuth auth = FirebaseAuth.getInstance();
+    private GoogleSignInClient googleSignInClient;
+    private Intent mainScreen;
+    private ProgressDialog progressDialog;
+    private CallbackManager callbackManager;
+    private AlertDialog error;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,30 +61,30 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         builder.setNeutralButton(android.R.string.ok,
                 (dialog, id) -> dialog.cancel());
 
-        _error = builder.create();
+        error = builder.create();
 
-        _mainScreen = new Intent(this, LecturersActivity.class);
+        mainScreen = new Intent(this, LecturersActivity.class);
 
 
 
         setContentView(R.layout.activity_log_in);
-        _googleBtn = findViewById(R.id.google);
-        _facebookBtn = findViewById(R.id.facebook);
-        _progressDialog = new ProgressDialog(this);
+        googleBtn = findViewById(R.id.google);
+        facebookBtn = findViewById(R.id.facebook);
+        progressDialog = new ProgressDialog(this);
 
-        _googleBtn.setOnClickListener(this);
-        _facebookBtn.setOnClickListener(this);
+        googleBtn.setOnClickListener(this);
+        facebookBtn.setOnClickListener(this);
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken("480379190-n37hgr44oa67lroc4ir934kb90heei4d.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
-        _googleSignInClient = GoogleSignIn.getClient(this, gso);
+        googleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        _callbackManager = CallbackManager.Factory.create();
+        callbackManager = CallbackManager.Factory.create();
 
-        _facebookBtn.setReadPermissions("email", "public_profile");
+        facebookBtn.setReadPermissions("email", "public_profile");
 
-        _facebookBtn.registerCallback(_callbackManager, new FacebookCallback<LoginResult>() {
+        facebookBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 handleFacebookAccessToken(loginResult.getAccessToken());
@@ -96,23 +102,23 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             }
         });
 
-        if (_auth.getCurrentUser() != null) {
-            startActivity(_mainScreen);
+        if (auth.getCurrentUser() != null) {
+            startActivity(mainScreen);
         }
     }
 
 
     private void logInGoogle() {
-        Intent signInIntent = _googleSignInClient.getSignInIntent();
-        _progressDialog.setMessage(getResources().getString(R.string.logging));
-        _progressDialog.show();
+        Intent signInIntent = googleSignInClient.getSignInIntent();
+        progressDialog.setMessage(getResources().getString(R.string.logging));
+        progressDialog.show();
         startActivityForResult(signInIntent, Constants.RC_SIGN_IN);
     }
 
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        _callbackManager.onActivityResult(requestCode, resultCode, data);
+        callbackManager.onActivityResult(requestCode, resultCode, data);
         super.onActivityResult(requestCode, resultCode, data);
 
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
@@ -124,7 +130,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                _progressDialog.dismiss();
+                progressDialog.dismiss();
                 e.printStackTrace();
                 Toast.makeText(LogInActivity.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
 
@@ -134,21 +140,17 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
-        _auth.signInWithCredential(credential)
+        auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-//                        String userId = _auth.getCurrentUser().getUid();
-//                        _auth.getUid()
-//                        DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-//                        currentUserDb.setValue(true);
-                        //currentUserDb.
-                        _progressDialog.dismiss();
-                        startActivity(_mainScreen);
+                        String userId = auth.getCurrentUser().getUid();
+                        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+                        checkCreateUserEntityAndLogIn(usersRef, userId);
 
                     } else {
                         // If sign in fails, display a message to the user.
-                        _progressDialog.dismiss();
+                        progressDialog.dismiss();
                         Toast.makeText(LogInActivity.this, getResources().getString(R.string.signInError), Toast.LENGTH_SHORT).show();
 
                     }
@@ -159,16 +161,16 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void logInFacebook() {
-        _progressDialog.setMessage(getResources().getString(R.string.logging));
-        _progressDialog.show();
+        progressDialog.setMessage(getResources().getString(R.string.logging));
+        progressDialog.show();
     }
 
     @Override
     public void onClick(View view) {
 
-        if (view == _facebookBtn) {
+        if (view == facebookBtn) {
             logInFacebook();
-        } else if (view == _googleBtn) {
+        } else if (view == googleBtn) {
             logInGoogle();
         }
 
@@ -178,7 +180,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-        _googleSignInClient.signOut();
+        googleSignInClient.signOut();
         if (isFbLoggedIn()) {
             facebookLogout();
         }
@@ -188,19 +190,17 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
 
         AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
-        _auth.signInWithCredential(credential)
+        auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
                         // Sign in success, update UI with the signed-in user's information
-                        String userId = _auth.getCurrentUser().getUid();
-                        DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(userId);
-                        currentUserDb.setValue(true);
-                        _progressDialog.dismiss();
-                        startActivity(_mainScreen);
+                        String userId = auth.getCurrentUser().getUid();
+                        DatabaseReference usersRef = FirebaseDatabase.getInstance().getReference().child("Users");
+                        checkCreateUserEntityAndLogIn(usersRef, userId);
                     } else {
                         // If sign in fails, display a message to the user.
-                        _progressDialog.dismiss();
-                        _error.show();
+                        progressDialog.dismiss();
+                        error.show();
                         if (isFbLoggedIn()) {
                             facebookLogout();
                         }
@@ -218,5 +218,25 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
         LoginManager.getInstance().logOut();
         AccessToken.setCurrentAccessToken(null);
     }
+
+
+    private void checkCreateUserEntityAndLogIn(final DatabaseReference usersRef, final String userId) {
+        usersRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (!snapshot.hasChild(userId)) {
+                    usersRef.child(userId).setValue(User.generateNewUser());
+                }
+                progressDialog.dismiss();
+                startActivity(mainScreen);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
+
+
 
 }

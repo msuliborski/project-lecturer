@@ -96,7 +96,8 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
                     }
                     Lecturer lecturer = new Lecturer(
                             favLecturers.contains(lecturerDataSnapshot.child("lecturerID").getValue().toString()), lecturerDataSnapshot.getKey(), lecturerDataSnapshot.child("firstName").getValue().toString(),
-                            lecturerDataSnapshot.child("lastName").getValue().toString(), lecturerDataSnapshot.child("title").getValue().toString(), presences);
+                            lecturerDataSnapshot.child("lastName").getValue().toString(), lecturerDataSnapshot.child("title").getValue().toString(),
+                            presences, lecturerDataSnapshot.child("imageUrl").getValue().toString());
                     lecturers.add(lecturer);
                 }
 

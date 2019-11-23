@@ -1,6 +1,4 @@
 package com.ms.projectlecturer.model;
-
-import com.google.firebase.database.Exclude;
 import com.google.firebase.database.IgnoreExtraProperties;
 import com.ms.projectlecturer.R;
 import android.content.Context;
@@ -37,6 +35,7 @@ public class Lecturer implements Comparable<Lecturer> {
     private String lastName;
     private String title;
     private Map<String, Presence> presences;
+    private String imageUrl;
 
     public Map<String, Object> toMap() {
         HashMap<String, Object> result = new HashMap<>();
@@ -45,6 +44,7 @@ public class Lecturer implements Comparable<Lecturer> {
         result.put("lastName", lastName);
         result.put("title", title);
         result.put("presences", presences);
+        result.put("imageUrl", imageUrl);
         return result;
     }
 
