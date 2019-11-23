@@ -1,4 +1,5 @@
-# PROJECT: Lecturer
+<h1> <img width="25" src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">PROJECT: Lecturer </h1>
+
 Simple application for Android that helps to find lecturers in Technical University in Lodz. Introduction to Mobile Systems (2020).<br/>
 <!-- <p align="center">
   <img width="210" src="images/1.jpg">
