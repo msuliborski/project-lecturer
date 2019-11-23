@@ -20,9 +20,12 @@ import com.ms.projectlecturer.model.Lecturer;
 import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+
 public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.ViewHolder> implements Filterable {
 
     private List<Lecturer> allLecturers;
+    @Getter
     private List<Lecturer> filteredLecturers;
     private LayoutInflater layoutInflater;
     private ItemClickListener itemClickListener;
