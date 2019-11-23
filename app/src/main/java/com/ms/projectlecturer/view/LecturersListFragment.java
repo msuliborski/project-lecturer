@@ -42,8 +42,6 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     private LecturerFragment lecturerFragment;
     private LayoutInflater layoutInflater;
     private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("");
-    private DatabaseReference lecturersReference = FirebaseDatabase.getInstance().getReference("Lecturers");
-    private DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Users");
     private List<Lecturer> lecturers;
     private LecturersListFragment lecturersListFragment = this;
     private SearchView lecturerSearchView;
@@ -57,7 +55,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
 
     @Override
     public void onItemClick(View view, int position) {
-        lecturerFragment.setLecturer(lecturers.get(position));
+        lecturerFragment.setLecturer(lecturersAdapter.getFilteredLecturers().get(position));
         lecturersActivity.setFragment(lecturerFragment);
     }
 
@@ -97,7 +95,7 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
                     Lecturer lecturer = new Lecturer(
                             favLecturers.contains(lecturerDataSnapshot.child("lecturerID").getValue().toString()), lecturerDataSnapshot.getKey(), lecturerDataSnapshot.child("firstName").getValue().toString(),
                             lecturerDataSnapshot.child("lastName").getValue().toString(), lecturerDataSnapshot.child("title").getValue().toString(),
-                            presences, lecturerDataSnapshot.child("imageUrl").getValue().toString());
+                            lecturerDataSnapshot.child("imageUrl").getValue().toString(), presences);
                     lecturers.add(lecturer);
                 }
 
