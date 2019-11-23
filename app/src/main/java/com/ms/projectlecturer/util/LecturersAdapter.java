@@ -58,8 +58,12 @@ public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.View
         Glide.with(context).load(lecturer.getImageUrl()).apply(RequestOptions.circleCropTransform()).into(lecturerAvatarImageView);
         ImageButton starImageButton = holder.itemView.findViewById(R.id.starImageButton);
         starImageButton.setImageResource(lecturer.getIsFavored() ? R.drawable.unstar : R.drawable.star);
-        starImageButton.setOnClickListener(v -> Spawner.removeLecturerFromFav(lecturer.getIsFavored() ? lecturer.getLecturerId() : lecturer.getLecturerId()));
-
+        starImageButton.setOnClickListener(v ->{
+            if (lecturer.getIsFavored())
+                Spawner.removeLecturerFromFav(lecturer.getLecturerId());
+            else
+                Spawner.addLecturerToFav(lecturer.getLecturerId());
+        });
         lecturerTitleTextView.setText(lecturer.getTitle());
         lecturerFirstNameTextView.setText(lecturer.getFirstName());
         lecturerLastNameTextView.setText(lecturer.getLastName());
