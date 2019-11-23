@@ -9,8 +9,11 @@ import android.content.Context;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.ms.projectlecturer.R;
 import com.ms.projectlecturer.model.Lecturer;
 
@@ -54,6 +57,8 @@ public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.View
         TextView lecturerTitleTextView = holder.itemView.findViewById(R.id.lecturerTitleTextView);
         TextView lecturerFirstNameTextView = holder.itemView.findViewById(R.id.lecturerFirstNameTextView);
         TextView lecturerLastNameTextView = holder.itemView.findViewById(R.id.lecturerLastNameTextView);
+        ImageView lecturerAvatarImageView = holder.itemView.findViewById(R.id.lecturerAvatarImageView);
+        Glide.with(context).load(lecturer.getImageUrl()).apply(RequestOptions.circleCropTransform()).into(lecturerAvatarImageView);
         ImageButton starImageButton = holder.itemView.findViewById(R.id.starImageButton);
         starImageButton.setImageResource(lecturer.getIsFavored() ? R.drawable.unstar : R.drawable.star);
         starImageButton.setOnClickListener(v -> Spawner.removeLecturerFromFav(lecturer.getIsFavored() ? lecturer.getLecturerId() : lecturer.getLecturerId()));
