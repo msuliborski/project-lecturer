@@ -26,7 +26,7 @@
         android:background="@drawable/card_background"
         android:text="@string/profileButton"
         android:textAlignment="center"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileImageView" />
@@ -38,7 +38,7 @@
         android:layout_marginTop="32dp"
         android:background="@drawable/card_background"
         android:text="@string/lecturersButton"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/profileButton" />
@@ -50,7 +50,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/card_background"
         android:text="@string/wikampButton"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintTop_toBottomOf="@+id/lecturersButton" />
 
     <Button
@@ -60,7 +60,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/card_background"
         android:text="@string/settingsButton"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/wikampButton" />
@@ -72,7 +72,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/card_background"
         android:text="@string/creditsButton"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/settingsButton" />
@@ -84,7 +84,7 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/card_background"
         android:text="@string/logoutButton"
-        android:textColor="@color/black"
+        android:textColor="@color/textColor"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/creditsButton" />

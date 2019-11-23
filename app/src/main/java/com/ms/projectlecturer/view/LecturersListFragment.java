@@ -8,11 +8,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,6 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.ms.projectlecturer.model.Lecturer;
 import com.ms.projectlecturer.model.Presence;
 import com.ms.projectlecturer.util.LecturersAdapter;
+import com.ms.projectlecturer.util.Spawner;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,7 +41,9 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
     private LecturersActivity lecturersActivity;
     private LecturerFragment lecturerFragment;
     private LayoutInflater layoutInflater;
+    private DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("");
     private DatabaseReference lecturersReference = FirebaseDatabase.getInstance().getReference("Lecturers");
+    private DatabaseReference usersReference = FirebaseDatabase.getInstance().getReference("Users");
     private List<Lecturer> lecturers;
     private LecturersListFragment lecturersListFragment = this;
     private SearchView lecturerSearchView;
@@ -74,19 +79,27 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
         recyclerView.setLayoutManager(layoutManager);
         lecturerSearchView = view.findViewById(R.id.lecturerSearchView);
 
-        lecturersReference.addValueEventListener(new ValueEventListener() {
+        databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String favLecturers = "";
+                for (DataSnapshot fav : dataSnapshot.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Favourites").getChildren()) {
+                    favLecturers += fav.getKey() + ";";
+                }
+
                 lecturers = new ArrayList<>();
-                for (DataSnapshot lecturerDataSnapshot : dataSnapshot.getChildren()) {
+                for (DataSnapshot lecturerDataSnapshot : dataSnapshot.child("Lecturers").getChildren()) {
                     Map<String, Presence> presences = new HashMap<>();
                     for (DataSnapshot presencesDataSnapshot : lecturerDataSnapshot.child("presences").getChildren()){
                         presences.put(presencesDataSnapshot.getKey(), presencesDataSnapshot.getValue(Presence.class));
                     }
-                    Lecturer lecturer = new Lecturer(lecturerDataSnapshot.getKey(), lecturerDataSnapshot.child("firstName").getValue().toString(),
+                    Lecturer lecturer = new Lecturer(
+                            favLecturers.contains(lecturerDataSnapshot.child("lecturerID").getValue().toString()), lecturerDataSnapshot.getKey(), lecturerDataSnapshot.child("firstName").getValue().toString(),
                             lecturerDataSnapshot.child("lastName").getValue().toString(), lecturerDataSnapshot.child("title").getValue().toString(), presences);
                     lecturers.add(lecturer);
                 }
+
                 Collections.sort(lecturers);
                 lecturersAdapter = new LecturersAdapter(layoutInflater, lecturers, getContext());
                 lecturerSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {

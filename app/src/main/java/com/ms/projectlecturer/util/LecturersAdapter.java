@@ -1,12 +1,14 @@
 package com.ms.projectlecturer.util;
 
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.content.Context;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.ms.projectlecturer.R;
@@ -46,6 +48,15 @@ public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.View
         TextView lecturerTitleTextView = holder.itemView.findViewById(R.id.lecturerTitleTextView);
         TextView lecturerFirstNameTextView = holder.itemView.findViewById(R.id.lecturerFirstNameTextView);
         TextView lecturerLastNameTextView = holder.itemView.findViewById(R.id.lecturerLastNameTextView);
+        ImageButton starImageButton = holder.itemView.findViewById(R.id.starImageButton);
+        starImageButton.setImageResource(lecturer.getIsFavored() ? R.drawable.unstar : R.drawable.star);
+        starImageButton.setOnClickListener(v -> {
+            if (lecturer.getIsFavored()){
+                Spawner.removeLecturerFromFav(lecturer.getLecturerId());
+            } else {
+                Spawner.addLecturerToFav(lecturer.getLecturerId());
+            }
+        });
 
         lecturerTitleTextView.setText(lecturer.getTitle());
         lecturerFirstNameTextView.setText(lecturer.getFirstName());

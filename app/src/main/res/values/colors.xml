@@ -12,12 +12,13 @@
     <color name="colorPrimary">#212121</color>
     <color name="colorAccent">#212121</color>
 
-    <color name="backgroundDark">#303030</color>
+    <color name="backgroundDark">#e1e2e1</color>
+    <color name="textColor">@color/black</color>
 
     <color name="dayPressed">@color/colorPrimary</color>
     <color name="daySelected">@color/colorPrimary</color>
     <color name="dayDeselected">@color/backgroundDark</color>
     <color name="daySelectedTextColor">@color/white</color>
-    <color name="dayDeselectedTextColor">@android:color/black</color>
+    <color name="dayDeselectedTextColor">@color/colorPrimary</color>
 
 </resources>

@@ -103,7 +103,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void logInGoogle() {
-
         Intent signInIntent = _googleSignInClient.getSignInIntent();
         _progressDialog.setMessage(getResources().getString(R.string.logging));
         _progressDialog.show();
@@ -134,8 +133,6 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void firebaseAuthWithGoogle(GoogleSignInAccount acct) {
-
-
         AuthCredential credential = GoogleAuthProvider.getCredential(acct.getIdToken(), null);
         _auth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
