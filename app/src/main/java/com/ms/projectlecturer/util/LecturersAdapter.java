@@ -48,18 +48,15 @@ public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.View
     public void onBindViewHolder(ViewHolder holder, int position) {
         Lecturer lecturer = filteredLecturers.get(position);
 
+        ImageButton lecturerAvatarImageView = holder.itemView.findViewById(R.id.lecturerAvatarImageView);
+//        lecturerAvatarImageView.setImageResource();
+        // set obrazka
         TextView lecturerTitleTextView = holder.itemView.findViewById(R.id.lecturerTitleTextView);
         TextView lecturerFirstNameTextView = holder.itemView.findViewById(R.id.lecturerFirstNameTextView);
         TextView lecturerLastNameTextView = holder.itemView.findViewById(R.id.lecturerLastNameTextView);
         ImageButton starImageButton = holder.itemView.findViewById(R.id.starImageButton);
         starImageButton.setImageResource(lecturer.getIsFavored() ? R.drawable.unstar : R.drawable.star);
-        starImageButton.setOnClickListener(v -> {
-            if (lecturer.getIsFavored()){
-                Spawner.removeLecturerFromFav(lecturer.getLecturerId());
-            } else {
-                Spawner.addLecturerToFav(lecturer.getLecturerId());
-            }
-        });
+        starImageButton.setOnClickListener(v -> Spawner.removeLecturerFromFav(lecturer.getIsFavored() ? lecturer.getLecturerId() : lecturer.getLecturerId()));
 
         lecturerTitleTextView.setText(lecturer.getTitle());
         lecturerFirstNameTextView.setText(lecturer.getFirstName());
