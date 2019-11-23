@@ -1,6 +1,7 @@
 package com.ms.projectlecturer.view;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,12 @@ import com.ms.projectlecturer.model.Presence;
 import com.ms.projectlecturer.util.PresencesAdapter;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.Locale;
+
+import ca.antonious.materialdaypicker.MaterialDayPicker;
 
 public class LecturerFragment extends Fragment implements PresencesAdapter.ItemClickListener, View.OnClickListener {
 
@@ -43,6 +49,7 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
     private MapFragment mapFragment;
     private LecturersActivity lecturersActivity;
     private RecyclerView.LayoutManager layoutManager;
+    private MaterialDayPicker dayPicker;
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,6 +71,15 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
         lecturerTitleTextView = view.findViewById(R.id.lecturerTitleTextView);
         lecturerFirstNameTextView = view.findViewById(R.id.lecturerFirstNameTextView);
         lecturerLastNameTextView = view.findViewById(R.id.lecturerLastNameTextView);
+        dayPicker = view.findViewById(R.id.dayPicker);
+        dayPicker.setLocale(Locale.ENGLISH);
+        dayPicker.setDaySelectionChangedListener(selectedDays -> {
+            String selectedDaysString = "";
+            for (MaterialDayPicker.Weekday day : selectedDays){
+                selectedDaysString += day.toString();
+            }
+            presencesAdapter.getFilter().filter(selectedDaysString);
+        });
     }
 
     @Override
@@ -98,6 +114,7 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
                }
                 presencesAdapter = new PresencesAdapter(layoutInflater, presences, getContext());
                 recyclerView.setAdapter(presencesAdapter);
+                dayPicker.selectDay(MaterialDayPicker.Weekday.valueOf(new GregorianCalendar().getDisplayName( Calendar.DAY_OF_WEEK ,Calendar.LONG, Locale.getDefault()).toUpperCase()));
                 presencesAdapter.setClickListener(lecturerFragment);
             }
 

@@ -13,6 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Monday"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -22,6 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="12:15 - 13:45"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dayOfTheWeekTextView" />
@@ -31,6 +33,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="443"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buildingNameTextView" />
@@ -40,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LODEX (B9)"
+        android:textColor="@color/black"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
