@@ -20,12 +20,18 @@ public class Lecturer implements Comparable<Lecturer> {
 
     @Override
     public int compareTo(Lecturer o) {
-        if (lastName.compareTo(o.lastName) == 0) {
-            return firstName.compareTo(o.firstName);
+
+        if (isFavored != o.isFavored){
+            if (isFavored) return -1;
+            else return 1;
+        } else {
+            if (lastName.compareTo(o.lastName) == 0)
+                return firstName.compareTo(o.firstName);
+            return lastName.compareTo(o.lastName);
         }
-        return lastName.compareTo(o.lastName);
     }
 
+    private Boolean isFavored;
     private String lecturerId;
     private String firstName;
     private String lastName;

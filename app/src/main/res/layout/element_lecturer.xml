@@ -30,21 +30,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="mgr. inż."
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="18sp" />
         <TextView
             android:id="@+id/lecturerFirstNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Jan"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="18sp"  />
         <TextView
             android:id="@+id/lecturerLastNameTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Kowalski"
-            android:textColor="@color/black"
+            android:textColor="@color/textColor"
             android:textSize="18sp" />
     </LinearLayout>
 

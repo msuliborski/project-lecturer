@@ -11,15 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-
+import androidx.appcompat.widget.AppCompatSpinner;
 import com.ms.projectlecturer.R;
 
 import java.util.Objects;
 
 public class SettingsFragment extends Fragment implements AdapterView.OnItemSelectedListener {
 
-    private Spinner languageSpinner;
+    private AppCompatSpinner languageSpinner;
     private LecturersActivity lecturersActivity;
     private SharedPreferences sharedPreferences;
     private Configuration configuration;
