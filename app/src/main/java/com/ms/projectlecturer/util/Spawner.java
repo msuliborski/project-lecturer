@@ -13,9 +13,9 @@ public class Spawner {
 
     private static DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-    public static void spawnNewLecturer(String firstName, String lastName, String title, Map<String, Presence> presences) {
+    public static void spawnNewLecturer(String firstName, String lastName, String title, Map<String, Presence> presences, String imageUrl) {
         String key = databaseReference.child("Lecturers").push().getKey();
-        Lecturer lecturer = new Lecturer(false, key, firstName, lastName, title, presences);
+        Lecturer lecturer = new Lecturer(false, key, firstName, lastName, title, presences, imageUrl);
         Map<String, Object> lecturerValues = lecturer.toMap();
         Map<String, Object> childUpdates = new HashMap<>();
         childUpdates.put("/Lecturers/" + key, lecturerValues);
