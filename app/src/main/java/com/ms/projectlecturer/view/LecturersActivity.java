@@ -81,7 +81,7 @@ public class LecturersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecturers);
 
-//        populateDatabase();
+        //populateDatabase();
 
         sharedPreferences = getApplicationContext().getSharedPreferences("global", MODE_PRIVATE);
         resources = getResources();
@@ -142,44 +142,54 @@ public class LecturersActivity extends AppCompatActivity {
     }
 
     public void populateDatabase(){
-        // LODEX (B9)           51.747230, 19.453853
-        // CTI (B7)             51.747002, 19.455931
-        // Ins. Fizyki (B14)    51.746546, 19.455403
+        // LODEX (B9)            51.747230, 19.453853
+        // CTI (B19)             51.747002, 19.455931
+        // Ins. Fizyki (B14)     51.746546, 19.455403
 
-        Map<String, Presence> ABPresences = new HashMap<>();
-        ABPresences.put("230", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        ABPresences.put("30", new Presence(DayOfTheWeek.Monday, "10:15:00", "12:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        ABPresences.put("0", new Presence(DayOfTheWeek.Monday, "12:15:00", "14:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        ABPresences.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        ABPresences.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        ABPresences.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        ABPresences.put("24", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        ABPresences.put("4", new Presence(DayOfTheWeek.Friday, "12:15:00", "14:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        Spawner.spawnNewLecturer("Aaaaa", "Bbbbbb", "dr. inż.", ABPresences);
+        Map<String, Presence> presenceSet1 = new HashMap<>();
+        presenceSet1.put("230", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+        presenceSet1.put("30", new Presence(DayOfTheWeek.Monday, "10:15:00", "11:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+        presenceSet1.put("222", new Presence(DayOfTheWeek.Monday, "12:15:00", "13:45:00", "100", "CTI (B19)", 51.747230, 19.453853));
+        presenceSet1.put("0", new Presence(DayOfTheWeek.Monday, "14:15:00", "15:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+        presenceSet1.put("231", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+        presenceSet1.put("17", new Presence(DayOfTheWeek.Tuesday, "12:15:00", "13:45:00", "100", "CTI (B19)", 51.747230, 19.453853));
+        presenceSet1.put("51", new Presence(DayOfTheWeek.Tuesday, "14:15:00", "15:45:00", "100", "CTI (B19)", 51.747230, 19.453853));
+        presenceSet1.put("112", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747230, 19.453853));
+        presenceSet1.put("22", new Presence(DayOfTheWeek.Wednesday, "12:15:00", "13:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
+        presenceSet1.put("3", new Presence(DayOfTheWeek.Thursday, "10:15:00", "11:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
 
-        Map<String, Presence> CDPresences = new HashMap<>();
-        CDPresences.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        CDPresences.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        CDPresences.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        CDPresences.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        CDPresences.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        Spawner.spawnNewLecturer("Cccccc", "Dddddd", "dr. inż.", CDPresences);
+        Map<String, Presence> presenceSet2 = new HashMap<>();
+        presenceSet2.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
+        presenceSet2.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
+        presenceSet2.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
+        presenceSet2.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
+        presenceSet2.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
 
-        Map<String, Presence> EFPresences = new HashMap<>();
-        EFPresences.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        EFPresences.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        EFPresences.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        EFPresences.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        EFPresences.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        Spawner.spawnNewLecturer("Eeeee", "Fffff", "dr. inż.", EFPresences);
+        Map<String, Presence> presenceSet3 = new HashMap<>();
+        presenceSet3.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747002, 19.455931 ));
+        presenceSet3.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747002, 19.455931 ));
+        presenceSet3.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747002, 19.455931 ));
+        presenceSet3.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747002, 19.455931 ));
+        presenceSet3.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747002, 19.455931 ));
 
-        Map<String, Presence> GHPresences = new HashMap<>();
-        GHPresences.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        GHPresences.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        GHPresences.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        GHPresences.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        GHPresences.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "CTI (B7)", 51.747002, 19.455931 ));
-        Spawner.spawnNewLecturer("Gggggg", "Hhhhhh", "dr. inż.", GHPresences);
+        Map<String, Presence> presenceSet4 = new HashMap<>();
+        presenceSet4.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
+        presenceSet4.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
+        presenceSet4.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
+        presenceSet4.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
+        presenceSet4.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
+
+        Spawner.spawnNewLecturer("Jan", "Kowalski", "dr. inż.", presenceSet1);
+        Spawner.spawnNewLecturer("Piotr", "Nowak", "dr. inż.", presenceSet2);
+        Spawner.spawnNewLecturer("Dariusz", "Piekarski", "dr.", presenceSet1);
+        Spawner.spawnNewLecturer("Artur", "Boski", "dr. inż., hab.", presenceSet3);
+        Spawner.spawnNewLecturer("Beata", "Adamska", "dr. inż.", presenceSet1);
+        Spawner.spawnNewLecturer("Agata", "Grzelak", "dr. inż.", presenceSet4);
+        Spawner.spawnNewLecturer("Adam", "Komar", "dr. inż.", presenceSet1);
+        Spawner.spawnNewLecturer("Arkadiusz", "Błaszczyk", "prof. hab.", presenceSet3);
+        Spawner.spawnNewLecturer("Michał", "Wilanowski", "dr. inż.", presenceSet1);
+        Spawner.spawnNewLecturer("Wojciech", "Lech", "prof.", presenceSet2);
+        Spawner.spawnNewLecturer("Filip", "Wojciechowski", "dr. inż.", presenceSet4);
     }
 
     @Override
