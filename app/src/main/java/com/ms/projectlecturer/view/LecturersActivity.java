@@ -114,8 +114,6 @@ public class LecturersActivity extends AppCompatActivity {
         fragmentTransaction.hide(settingsFragment);
         fragmentTransaction.hide(creditsFragment);
         fragmentTransaction.commit();
-
-        populateDatabase();
     }
 
     public void setFragment(Fragment newFragment) {
