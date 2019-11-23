@@ -5,9 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 
-import com.google.android.material.navigation.NavigationView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -28,7 +26,6 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
-
 public class LecturersActivity extends AppCompatActivity {
 
     private ActionBarDrawerToggle actionBarDrawerToggle;
@@ -44,7 +41,7 @@ public class LecturersActivity extends AppCompatActivity {
     private CreditsFragment creditsFragment = new CreditsFragment();
     private SidebarFragment sidebarFragment = new SidebarFragment();
     private Fragment previousFragment = lecturersListFragment;
-    private Fragment currentFragment;
+    private Fragment currentFragment = lecturersListFragment;
 
     private SharedPreferences sharedPreferences;
     private Configuration configuration;
@@ -116,16 +113,13 @@ public class LecturersActivity extends AppCompatActivity {
         fragmentTransaction.hide(profileFragment);
         fragmentTransaction.hide(settingsFragment);
         fragmentTransaction.hide(creditsFragment);
-        currentFragment = lecturersListFragment;
         fragmentTransaction.commit();
     }
 
     public void setFragment(Fragment newFragment) {
         if (newFragment != null) {
             if(newFragment != currentFragment) {
-                if (newFragment != settingsFragment && newFragment != creditsFragment && newFragment != profileFragment){
-                    previousFragment = currentFragment;
-                }
+                previousFragment = currentFragment;
                 fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.hide(currentFragment);
                 currentFragment = newFragment;
@@ -201,15 +195,15 @@ public class LecturersActivity extends AppCompatActivity {
         if (currentFragment == lecturersListFragment) {
             super.onBackPressed();
         } else if (currentFragment == profileFragment) {
-            setFragment(previousFragment);
+            setFragment(lecturersListFragment);
         } else if (currentFragment == lecturerFragment) {
             setFragment(lecturersListFragment);
         } else if (currentFragment == mapFragment) {
             setFragment(lecturerFragment);
         } else if (currentFragment == settingsFragment) {
-            setFragment(previousFragment);
+            setFragment(lecturersListFragment);
         } else if (currentFragment == creditsFragment) {
-            setFragment(previousFragment);
+            setFragment(lecturersListFragment);
         }
     }
 }
