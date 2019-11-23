@@ -98,7 +98,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onError(FacebookException error) {
-
+                error.printStackTrace();
             }
         });
 
@@ -233,6 +233,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+                databaseError.toException().printStackTrace();
             }
         });
     }

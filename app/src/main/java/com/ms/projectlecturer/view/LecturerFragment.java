@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -39,10 +42,10 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
     private TextView lecturerTitleTextView;
     private TextView lecturerFirstNameTextView;
     private TextView lecturerLastNameTextView;
+    private ImageView lecturerAvatarImageView;
     private Resources resources;
     private RecyclerView recyclerView;
     private PresencesAdapter presencesAdapter;
-    private Lecturer lecturer;
     private List<Presence> presences;
     private ValueEventListener currentListener;
     private DatabaseReference lecturerReference;
@@ -73,6 +76,7 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
         lecturerTitleTextView = view.findViewById(R.id.lecturerTitleTextView);
         lecturerFirstNameTextView = view.findViewById(R.id.lecturerFirstNameTextView);
         lecturerLastNameTextView = view.findViewById(R.id.lecturerLastNameTextView);
+        lecturerAvatarImageView = view.findViewById(R.id.lecturerAvatarImageView);
         dayPicker = view.findViewById(R.id.dayPicker);
         Locale locale = lecturersActivity.getConf().locale;
         dayPicker.setLocale(locale);
@@ -108,6 +112,7 @@ public class LecturerFragment extends Fragment implements PresencesAdapter.ItemC
         lecturerTitleTextView.setText(lecturer.getTitle());
         lecturerFirstNameTextView.setText(lecturer.getFirstName());
         lecturerLastNameTextView.setText(lecturer.getLastName());
+        Glide.with(getActivity()).load(lecturer.getImageUrl()).apply(RequestOptions.circleCropTransform()).into(lecturerAvatarImageView);
         currentListener = lecturerReference.child("presences").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
