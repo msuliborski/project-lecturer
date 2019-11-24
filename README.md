@@ -1,11 +1,19 @@
-# PROJECT: Lecturer
+<h1> <img width="25" src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png">PROJECT: Lecturer </h1>
+
 Simple application for Android that helps to find lecturers in Technical University in Lodz. Introduction to Mobile Systems (2020).<br/>
-<!-- <p align="center">
+
+<p align="center">
   <img width="210" src="images/1.jpg">
   <img width="210" src="images/2.jpg">
   <img width="210" src="images/3.jpg">
   <img width="210" src="images/4.jpg">
-</p> -->
+</p>
+
+<p align="center">
+  <img width="210" src="images/5.jpg">
+  <img width="210" src="images/6.jpg">
+  <img width="210" src="images/7.jpg">
+</p>
 
 ### Download
 All releases of the game are avaliable on the github page in the [releases](https://github.com/msuliborski/project-lecturer/releases) tab. 
