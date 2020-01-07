@@ -81,7 +81,7 @@ public class LecturersActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lecturers);
 
-        //populateDatabase();
+//        populateDatabase();
 
         sharedPreferences = getApplicationContext().getSharedPreferences("global", MODE_PRIVATE);
         resources = getResources();
@@ -149,21 +149,21 @@ public class LecturersActivity extends AppCompatActivity {
         Map<String, Presence> presenceSet1 = new HashMap<>();
         presenceSet1.put("230", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
         presenceSet1.put("30", new Presence(DayOfTheWeek.Monday, "10:15:00", "11:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        presenceSet1.put("222", new Presence(DayOfTheWeek.Monday, "12:15:00", "13:45:00", "100", "CTI (B19)", 51.747230, 19.453853));
+        presenceSet1.put("222", new Presence(DayOfTheWeek.Monday, "12:15:00", "13:45:00", "100", "CTI (B19)", 51.747002, 19.455931));
         presenceSet1.put("0", new Presence(DayOfTheWeek.Monday, "14:15:00", "15:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
         presenceSet1.put("231", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
-        presenceSet1.put("17", new Presence(DayOfTheWeek.Tuesday, "12:15:00", "13:45:00", "100", "CTI (B19)", 51.747230, 19.453853));
-        presenceSet1.put("51", new Presence(DayOfTheWeek.Tuesday, "14:15:00", "15:45:00", "100", "CTI (B19)", 51.747230, 19.453853));
-        presenceSet1.put("112", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747230, 19.453853));
+        presenceSet1.put("17", new Presence(DayOfTheWeek.Tuesday, "12:15:00", "13:45:00", "100", "CTI (B19)", 51.747002, 19.455931));
+        presenceSet1.put("51", new Presence(DayOfTheWeek.Tuesday, "14:15:00", "15:45:00", "100", "CTI (B19)", 51.747002, 19.455931));
+        presenceSet1.put("112", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747002, 19.455931));
         presenceSet1.put("22", new Presence(DayOfTheWeek.Wednesday, "12:15:00", "13:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
         presenceSet1.put("3", new Presence(DayOfTheWeek.Thursday, "10:15:00", "11:45:00", "100", "LODEX (B9)", 51.747230, 19.453853));
 
         Map<String, Presence> presenceSet2 = new HashMap<>();
-        presenceSet2.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
-        presenceSet2.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
-        presenceSet2.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
-        presenceSet2.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
-        presenceSet2.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747002, 19.455931 ));
+        presenceSet2.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853 ));
+        presenceSet2.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853 ));
+        presenceSet2.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853 ));
+        presenceSet2.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853 ));
+        presenceSet2.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "LODEX (B9)", 51.747230, 19.453853 ));
 
         Map<String, Presence> presenceSet3 = new HashMap<>();
         presenceSet3.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747002, 19.455931 ));
@@ -173,11 +173,11 @@ public class LecturersActivity extends AppCompatActivity {
         presenceSet3.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "CTI (B19)", 51.747002, 19.455931 ));
 
         Map<String, Presence> presenceSet4 = new HashMap<>();
-        presenceSet4.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
-        presenceSet4.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
-        presenceSet4.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
-        presenceSet4.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
-        presenceSet4.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.747002, 19.455931 ));
+        presenceSet4.put("0", new Presence(DayOfTheWeek.Monday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.746546, 19.455403 ));
+        presenceSet4.put("1", new Presence(DayOfTheWeek.Tuesday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.746546, 19.455403 ));
+        presenceSet4.put("2", new Presence(DayOfTheWeek.Wednesday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.746546, 19.455403 ));
+        presenceSet4.put("3", new Presence(DayOfTheWeek.Thursday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.746546, 19.455403 ));
+        presenceSet4.put("4", new Presence(DayOfTheWeek.Friday, "08:15:00", "09:45:00", "100", "Ins. Fizyki (B14)", 51.746546, 19.455403 ));
         Spawner.spawnNewLecturer("Piotr", "Napieralski", "dr. inż.", "https://ftims.edu.p.lodz.pl/pluginfile.php/1378/user/icon/adaptable/f3?rev=3554694", presenceSet1);
         Spawner.spawnNewLecturer("Piotr", "Nowak", "dr. inż.", "", presenceSet2);
         Spawner.spawnNewLecturer("Dariusz", "Piekarski", "dr.", "", presenceSet1);
