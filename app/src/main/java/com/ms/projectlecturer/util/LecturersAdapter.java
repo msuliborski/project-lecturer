@@ -108,10 +108,9 @@ public class LecturersAdapter extends RecyclerView.Adapter<LecturersAdapter.View
         List<Lecturer> results = new ArrayList<>();
 
         for (Lecturer l : allLecturers) {
-            String ls = l.getFirstName() + l.getLastName();
-            if (ls.toLowerCase().contains(constraint)) {
+            String ls = l.getTitle() + " " + l.getFirstName() + " " + l.getLastName();
+            if (ls.toLowerCase().contains(constraint))
                 results.add(l);
-            }
         }
         return results;
     }
