@@ -81,6 +81,8 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                Parcelable recyclerViewState = recyclerView.getLayoutManager().onSaveInstanceState(); //pause
+                
                 String favLecturers = "";
                 for (DataSnapshot fav : dataSnapshot.child("Users").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Favourites").getChildren()) {
                     favLecturers += fav.getKey() + ";";
@@ -115,6 +117,8 @@ public class LecturersListFragment extends Fragment implements View.OnClickListe
                 });
                 recyclerView.setAdapter(lecturersAdapter);
                 lecturersAdapter.setClickListener(lecturersListFragment);
+                
+                recyclerView.getLayoutManager().onRestoreInstanceState(recyclerViewState); //unpause
             }
 
             @Override
